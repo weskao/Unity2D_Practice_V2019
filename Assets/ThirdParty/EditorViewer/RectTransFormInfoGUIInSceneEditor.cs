@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 namespace Editor.DebugMode
 {
-    [CustomEditor(typeof(Transform))]
+    [CustomEditor(typeof(RectTransform))]
     [CanEditMultipleObjects]
-    public class TransFormInfoGUIInSceneEditor : TransformEditor
+    public class RectTransFormInfoGUIInSceneEditor : TransformEditor
     {
         private static bool _initFlag;
         private static readonly List<GameObject> GameObjects = new List<GameObject>();
@@ -231,6 +231,7 @@ namespace Editor.DebugMode
                 }
             }
         }
+
 
         private class WindowData
         {

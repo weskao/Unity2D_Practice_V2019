@@ -16,7 +16,6 @@ namespace Editor.DebugMode
         private SerializedProperty _scaleProperty;
         private Transform _transform;
 
-
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
