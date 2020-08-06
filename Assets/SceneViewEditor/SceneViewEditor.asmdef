@@ -1,0 +1,8 @@
+{
+    "name": "SceneViewEditor",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}
