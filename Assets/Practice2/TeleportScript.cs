@@ -23,12 +23,9 @@ namespace Practice2
         {
             EventManager.OnClicked += Teleoprt;
 
-            for (int i = 0; i < _buttonObjects.Length; i++)
+            foreach (var buttonObject in _buttonObjects)
             {
-                _buttonObjects[i].name = $"Button{i}";
-
-                var btnName = _buttonObjects[i].name;
-                _buttonObjects[i].button.onClick.AddListener(() => AddNumber(btnName));
+                buttonObject.button.onClick.AddListener(() => AddNumber(buttonObject.name));
             }
         }
 
@@ -38,8 +35,7 @@ namespace Practice2
 
             foreach (var buttonObject in _buttonObjects)
             {
-                var btnName = buttonObject.name;
-                buttonObject.button.onClick.RemoveListener(() => AddNumber(btnName));
+                buttonObject.button.onClick.RemoveListener(() => AddNumber(buttonObject.name));
             }
         }
 
