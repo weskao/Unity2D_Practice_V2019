@@ -4,7 +4,7 @@ namespace Editor.SceneViewEditor.Source
 {
     public static class EditorMenuItems
     {
-        private const string Url = "CustomEditor/Naming WindowBox";
+        private const string Url = "SceneViewEditor/Running";
         private static readonly SceneViewEditor SceneViewEditor = new SceneViewEditor();
 
         [MenuItem(Url)]

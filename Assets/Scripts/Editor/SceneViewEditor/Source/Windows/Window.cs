@@ -2,40 +2,25 @@ using Editor.SceneViewEditor.Source.Extensions;
 using Editor.SceneViewEditor.Source.Interfaces;
 using UnityEditor;
 using UnityEngine;
-#if ENABLE_INPUT_SYSTEM
-using UnityEngine.InputSystem;
-#endif
+using Debug = UnityEngine.Debug;
 
-namespace Editor.SceneViewEditor.Source.Customs
+namespace Editor.SceneViewEditor.Source.Windows
 {
-    public class CustomWindow : IWindow
+    public class Window : IWindow
     {
         public int Id => _settings.Id;
-        public bool IsDataEmpty => Transform == null;
+
+        public bool IsActive => _settings.IsActive && Transform != null;
+
         public Transform Transform => _settings.Transform;
-        public bool IsActive
-        {
-            get
-            {
-                return _settings.IsActive;
-            }
-            set
-            {
-                _settings.IsActive = value;
-            }
-        }
 
         private static bool _isCloseWindowExecuted;
         private static bool _isEscapeKeyPressed;
-        private readonly CustomWindowHandler _handler;
         private readonly Settings _settings;
-        private readonly CustomStyles _customStyles;
 
-        public CustomWindow(CustomWindowHandler handler, Settings settings, CustomStyles customStyles)
+        private Window(Settings settings)
         {
-            _handler = handler;
             _settings = settings;
-            _customStyles = customStyles;
         }
 
         public void Display()
@@ -49,25 +34,17 @@ namespace Editor.SceneViewEditor.Source.Customs
                 _settings.WindowSize,
                 WindowCallBackFunction,
                 "",
-                _customStyles.WindowBoxGUIStyle);
+                GUI.skin.window);
         }
 
         public void Close()
         {
-            var transform = _settings.Transform;
-            var position = _handler.WorldToScreenPoint(transform.position);
-
             _settings.IsActive = false;
-            _settings.WindowSize = new Rect(position, _settings.WindowSize.size);
-
-            var window = _handler.GetNextHandleWindow(this);
-            Selection.SetActiveObjectWithContext(window?.Transform, null);
         }
 
         private void WindowCallBackFunction(int transformId)
         {
             // The execute order is important.
-
             // Handle Window Event
             HandleWindowEvents();
             HandleFocusedWindowEvents(transformId);
@@ -76,16 +53,17 @@ namespace Editor.SceneViewEditor.Source.Customs
             WindowGUILayout();
 
             // Key pressed Update
-            UpdateEscapeKey();
+            InputEventUpdate();
         }
 
         private void HandleWindowEvents()
         {
-            // When the window is clicked, the selection would be set to the gameObject's transform.
-            if (Event.current.type == EventType.MouseDown)
+            if (Event.current.type != EventType.MouseDown)
             {
-                Selection.SetActiveObjectWithContext(_settings.Transform, null);
+                return;
             }
+
+            Selection.SetActiveObjectWithContext(_settings.Transform, null);
         }
 
         private void HandleFocusedWindowEvents(int transformId)
@@ -122,20 +100,18 @@ namespace Editor.SceneViewEditor.Source.Customs
 
         private void WindowGUILayout()
         {
-            using (new GUILayout.AreaScope(new Rect(130, 0, 20, 20)))
+            using (new GUILayout.AreaScope(new Rect(140, 5, 20, 20)))
             {
-                DisplayCloseButton();
+                if (GUILayout.Button("X", GUI.skin.customStyles[0]))
+                {
+                    Close();
+                }
             }
 
             GUILayout.Space(5);
 
-            using (var scrollViewScope = new GUILayout.ScrollViewScope(
-                _settings.ScrollPosition,
-                false,
-                false,
-                _customStyles.HorizontalScrollbarGUIStyle,
-                _customStyles.VerticalScrollbarGUIStyle,
-                _customStyles.ScrollViewBackGroundGUIStyle))
+            using (var scrollViewScope = new GUILayout.ScrollViewScope(_settings.ScrollPosition,
+                GUILayout.Height(125), GUILayout.ExpandWidth(true)))
             {
                 _settings.ScrollPosition = scrollViewScope.scrollPosition;
                 DisplayScrollViewContent();
@@ -162,33 +138,22 @@ namespace Editor.SceneViewEditor.Source.Customs
 
                 if (i == 0)
                 {
-                    transforms[i].name =
-                        GUILayout.TextField(transforms[i].name, _customStyles.EditableTextGUIStyle);
+                    transforms[i].name = GUILayout.TextField(transforms[i].name);
                 }
                 else
                 {
-                    GUILayout.Label(transforms[i].name, _customStyles.LabelTextGUIStyle);
+                    GUILayout.Label(transforms[i].name);
                 }
 
                 GUILayout.EndHorizontal();
             }
         }
 
-        private void DisplayCloseButton()
+        private void InputEventUpdate()
         {
-            if (GUILayout.Button("X", _customStyles.CloseButtonGUIStyle))
-            {
-                Close();
-            }
-        }
-
-        private static void UpdateEscapeKey()
-        {
-#if ENABLE_INPUT_SYSTEM
-            _isEscapeKeyPressed = Keyboard.current.escapeKey.isPressed;
-#else
-            _isEscapeKeyPressed = Input.GetKey(KeyCode.Escape);
-#endif
+            var e = Event.current;
+            _isEscapeKeyPressed = e.type == EventType.KeyDown &&
+                                  e.keyCode == KeyCode.Escape;
         }
 
 
@@ -196,8 +161,8 @@ namespace Editor.SceneViewEditor.Source.Customs
         {
             public int Id => Transform.GetInstanceID();
             public bool IsActive { get; set; }
-            public Vector2 ScrollPosition { get; set; }
             public Rect WindowSize { get; set; }
+            public Vector2 ScrollPosition { get; set; }
             public Transform Transform { get; }
 
             public Settings(bool isActive, Rect windowSize, Vector2 scrollPosition, Transform transform)
@@ -206,6 +171,15 @@ namespace Editor.SceneViewEditor.Source.Customs
                 WindowSize = windowSize;
                 ScrollPosition = scrollPosition;
                 Transform = transform;
+            }
+        }
+
+
+        public class Factory : IFactory<Settings, IWindow>
+        {
+            public IWindow Create(Settings settings)
+            {
+                return new Window(settings);
             }
         }
     }

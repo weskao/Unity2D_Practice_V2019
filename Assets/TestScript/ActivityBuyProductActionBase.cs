@@ -18,6 +18,8 @@ namespace TestScript
         [SerializeField]
         private GameObject discountSign = null;
 
+        protected Button myButton;
+
         private string GetFinalProductId(ProductInfo[] products)
         {
             return "";
@@ -43,31 +45,19 @@ namespace TestScript
 
         private static int _fakeVIPLevel = 0;
         private bool _isOneClickUpgradeLevelEnabled = false;
+
+        // TODO: Refactor _hasAnyProduct 相關的 Code
         private bool _hasAnyProduct = false;
+
+        public ActivityBuyProductActionBase(Button myButton)
+        {
+            this.myButton = myButton;
+        }
 
         protected virtual void OnBuyBtnClick(ProductAction action)
         {
-            //string productId = GetFinalProductId(action.products);
-
-            string productId;
-
-            if (_isOneClickUpgradeLevelEnabled)
-            {
-                _fakeVIPLevel = _fakeVIPLevel % 12;
-
-                var ids = new[] { "scg.promote.vip1.599.500000", "scg.promote.vip2.599.540000", "scg.promote.vip3.599.600000", "scg.promote.vip4.599.680000", "scg.promote.vip5.599.760000", "scg.promote.vip6.599.820000", "scg.promote.vip7.599.920000", "scg.promote.vip8.599.1200000", "scg.promote.vip9.599.1360000", "scg.promote.vip10.599.1600000", "scg.promote.vip11.599.2000000", "scg.promote.vip12.599.2400000" };
-                productId = ids[_fakeVIPLevel] + ".android";
-
-                _fakeVIPLevel++;
-            }
-            else
-            {
-                productId = GetFinalProductId(action.products);
-            }
-
+            string productId = GetFinalProductId(action.products);
             ShopModel.Instance.BuyProductID(productId, action.button.gameObject);
-
-            Debug.Log(string.Format("OnBuyBtnClick(), productId = {0}", productId));
         }
 
         private void FillValueToView(ProductAction actionItem, decimal price, long oriValue, long promoteValue, int vipPoint)
@@ -173,7 +163,6 @@ namespace TestScript
         private void Awake()
         {
             // base.Awake();
-            //
 
             for (int i = 0; i < _actions.Length; ++i)
             {
@@ -188,8 +177,7 @@ namespace TestScript
                 discountSign.SetActive(false);
 #endif
 
-                RefreshWholeView(true);
-            //CheckProductAvailable();
+                UpdateWholeView(!IsAnyProductAvailable(false)); // 傳入的參數為 "IsAnyProductAvailable(false)" , 避免 Exception
         }
 
         private void OnPurchaseComplete(string productName, bool result)
@@ -204,8 +192,7 @@ namespace TestScript
                 {
                     if (!error)
                     {
-                        RefreshWholeView(true);
-                        //CheckProductAvailable();
+                        UpdateWholeView(true);
                     }
                     else
                     {
@@ -220,43 +207,25 @@ namespace TestScript
         }
 
         // This method I decide not to use, because it will cause confusion.
-        public bool IsAnyProductAvailable(bool isEnableClosePage, bool isUpdateProductsGui)
-        {
-            // bool onOff = false;
 
+        public bool IsAnyProductAvailable(bool isUpdateData)
+        {
             // #if UNITY_ANDROID || UNITY_IOS
 
-            RefreshData(isUpdateProductsGui);
-            // #endif
-
-            if (!_hasAnyProduct && isEnableClosePage)
+            if (isUpdateData)
             {
-                Debug.LogFormat("<color=green>Sold out!!!</color>");
-                ClosePage();
+                UpdateData(false);
             }
 
-            return _hasAnyProduct;
-        }
-
-        /// <summary>
-        /// /////////////////////////////////////////////////////////////////////////////////
-        /// </summary>
-        /// <returns></returns>
-
-        public bool IsAnyProductAvailable()
-        {
-            // #if UNITY_ANDROID || UNITY_IOS
-
-            RefreshData(false);
             // #endif
 
             return _hasAnyProduct;
         }
 
-        public void RefreshWholeView(bool isEnableClosePage)
+        public void UpdateWholeView(bool isEnableClosePage)
         {
             // #if UNITY_ANDROID || UNITY_IOS
-            RefreshData(true);
+            UpdateData(true);
 
             if (!_hasAnyProduct && isEnableClosePage)
             {
@@ -266,16 +235,20 @@ namespace TestScript
             // #endif
         }
 
-        public void RefreshData(bool isUpdateProductsGui)
+        /////////////////////////////////////////////////////////////////////////////////
+
+        public void UpdateData(bool isUpdateProductsGui)
         {
             // #if UNITY_ANDROID || UNITY_IOS
+
+            var isIapReady = IAPManager.Instance.isIAPReady;
+
             for (int i = 0; i < _actions.Length; ++i)
             {
-                var shopItem = ShopModel.Instance.GetShopItemByProductId(GetFinalProductId(_actions[i].products));
+                var productId = GetFinalProductId(_actions[i].products);
+                var shopItem = ShopModel.Instance.GetShopItemByProductId(productId);
 
-                var isIAPReady = IAPManager.Instance.isIAPReady; // Question: Did this need to be checked every time?
-
-                var canBuy = shopItem != null && IAPManager.Instance.isIAPReady;
+                var canBuy = shopItem != null && isIapReady;
 
                 if (canBuy && isUpdateProductsGui)
                 {
@@ -292,9 +265,8 @@ namespace TestScript
                 }
 
                 _actions[i].button.interactable = canBuy;
+                _hasAnyProduct |= canBuy;
             }
-
-            _hasAnyProduct = _actions.Any(x => x.button.interactable.Equals(true));
 
             // #endif
         }
