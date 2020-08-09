@@ -620,6 +620,7 @@ GameObject:
   - component: {fileID: 1033914544}
   - component: {fileID: 1033914543}
   - component: {fileID: 1033914542}
+  - component: {fileID: 1033914546}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -710,6 +711,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!111 &1033914546
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1033914541}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: a3761642808d8d041b0d37f89327bf1f, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a3761642808d8d041b0d37f89327bf1f, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1045779217
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +738,8 @@ GameObject:
   - component: {fileID: 1045779220}
   - component: {fileID: 1045779219}
   - component: {fileID: 1045779222}
+  - component: {fileID: 1045779223}
+  - component: {fileID: 1045779224}
   m_Layer: 5
   m_Name: LemonHead
   m_TagString: Untagged
@@ -825,6 +843,38 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!111 &1045779223
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1045779217}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: a3761642808d8d041b0d37f89327bf1f, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a3761642808d8d041b0d37f89327bf1f, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!95 &1045779224
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1045779217}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: db41dc0106ea4b9409bf566bd562aacc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1049934505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,7 +1125,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 85, y: -34.95}
+  m_AnchoredPosition: {x: 278, y: 118.4}
   m_SizeDelta: {x: 201.1, y: 69.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1387493824
@@ -1735,8 +1785,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 41, y: -206.3}
-  m_SizeDelta: {x: -894.9, y: 194.6}
+  m_AnchoredPosition: {x: 29, y: -252}
+  m_SizeDelta: {x: -827.5, y: 91}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1945276580
 MonoBehaviour:
