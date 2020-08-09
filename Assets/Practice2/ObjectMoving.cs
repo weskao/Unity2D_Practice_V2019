@@ -1,25 +1,24 @@
 ﻿using UnityEngine;
-using UnityEngine.Experimental.UIElements;
 
 namespace Practice2
 {
     public class ObjectMoving : MonoBehaviour
     {
+        private static readonly int Forward = Animator.StringToHash("Forward");
+        private static readonly int Backward = Animator.StringToHash("Backward");
+
+        private static bool _isForward = true;
+
         [SerializeField]
         private Animator _animator;
 
-        [SerializeField]
-        private Button _triggerButton;
-
-        private static readonly int Forward = Animator.StringToHash("Forward");
-
-        private void Awake()
-        {
-        }
+        // [SerializeField]
+        // private Button _triggerButton;
 
         public void MoveSquare()
         {
-            _animator.SetTrigger(Forward);
+            _animator.SetTrigger(_isForward ? Forward : Backward);
+            _isForward = !_isForward;
         }
     }
 }

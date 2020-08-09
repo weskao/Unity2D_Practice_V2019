@@ -22,17 +22,22 @@ namespace ThirdParty
             clip = (AnimationClip)AssetDatabase.LoadAssetAtPath(copiedFilePath, typeof(AnimationClip));
 
             if (clip == null)
+            {
                 return;
+            }
+
             float clipLength = clip.length;
+
             var curves = AnimationUtility.GetAllCurves(clip, true);
             clip.ClearCurves();
+
             foreach (AnimationClipCurveData curve in curves)
             {
                 var keys = curve.curve.keys;
                 int keyCount = keys.Length;
-                var postWrapmode = curve.curve.postWrapMode;
+                var curvePostWrapMode = curve.curve.postWrapMode;
                 curve.curve.postWrapMode = curve.curve.preWrapMode;
-                curve.curve.preWrapMode = postWrapmode;
+                curve.curve.preWrapMode = curvePostWrapMode;
                 for (int i = 0; i < keyCount; i++)
                 {
                     Keyframe K = keys[i];
@@ -50,9 +55,9 @@ namespace ThirdParty
             var events = AnimationUtility.GetAnimationEvents(clip);
             if (events.Length > 0)
             {
-                for (int i = 0; i < events.Length; i++)
+                foreach (var animationEvent in events)
                 {
-                    events[i].time = clipLength - events[i].time;
+                    animationEvent.time = clipLength - animationEvent.time;
                 }
 
                 AnimationUtility.SetAnimationEvents(clip, events);
@@ -64,7 +69,7 @@ namespace ThirdParty
         [MenuItem("Assets/Create Reversed Clip", true)]
         private static bool ReverseClipValidation()
         {
-            return Selection.activeObject.GetType() == typeof(AnimationClip);
+            return Selection.activeObject is AnimationClip;
         }
 
         public static AnimationClip GetSelectedClip()
