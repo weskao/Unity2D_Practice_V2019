@@ -1,4 +1,4 @@
-﻿namespace TestScriptToRefactor
+﻿namespace TestScriptToRefactor.TestCaseOne
 {
     public class ShopItemInfo
     {

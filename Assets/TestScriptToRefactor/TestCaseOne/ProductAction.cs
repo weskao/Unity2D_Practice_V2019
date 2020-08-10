@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine.UI;
 
-namespace TestScriptToRefactor
+namespace TestScriptToRefactor.TestCaseOne
 {
     [Serializable]
     public class ProductAction

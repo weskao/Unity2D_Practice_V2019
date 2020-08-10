@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestScriptToRefactor
+namespace TestScriptToRefactor.TestCaseOne
 {
     [Serializable]
     public struct ProductInfo
