@@ -16,7 +16,13 @@ namespace TestScriptToRefactor.TestCaseTwo
 
         public TextMeshProUGUI completeCoinText;
 
-        public long MaxValueToShowCoinDetail => 999999999;
+        public long MaxValueToShowCoinDetail
+        {
+            get
+            {
+                return 999999999;
+            }
+        }
 
         public void SetButtonVisibility(bool isVisible)
         {

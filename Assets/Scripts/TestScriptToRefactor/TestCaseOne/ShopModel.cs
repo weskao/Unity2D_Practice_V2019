@@ -7,7 +7,13 @@ namespace TestScriptToRefactor.TestCaseOne
     {
         public static Action<string, bool> OnPurchaseComplete;
 
-        public static ShopModel Instance => new ShopModel();
+        public static ShopModel Instance
+        {
+            get
+            {
+                return new ShopModel();
+            }
+        }
 
         public void RequestShopItem(SmartWebCommandGroup @group, Action<bool> action)
         {

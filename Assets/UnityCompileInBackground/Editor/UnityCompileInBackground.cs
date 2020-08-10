@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
@@ -38,7 +39,7 @@ namespace UnityCompileInBackground.Editor
             var dataPath = Application.dataPath;
             var filename = dataPath + "/" + ConsoleAppPath;
             var path = Application.dataPath;
-            var arguments = $@"-p ""{path}"" -w 0 -d ""{pid}""";
+            var arguments = string.Format(@"-p ""{0}"" -w 0 -d ""{1}""", path, pid);
             var windowStyle = ProcessWindowStyle.Hidden;
             var info = new ProcessStartInfo
             {

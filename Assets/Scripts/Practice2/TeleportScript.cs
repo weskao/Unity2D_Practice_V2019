@@ -42,7 +42,8 @@ namespace Practice2
         private void AddNumber(string buttonName)
         {
             _number++;
-            Debug.Log($"Invoke {buttonName}.{MethodBase.GetCurrentMethod().Name} method, number = {_number}");
+            Debug.Log(string.Format("Invoke {0}.{1} method, number = {2}",
+                buttonName, MethodBase.GetCurrentMethod().Name, _number));
         }
 
         private void Teleoprt()
