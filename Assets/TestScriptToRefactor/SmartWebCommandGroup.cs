@@ -1,4 +1,4 @@
-﻿namespace TestScript
+﻿namespace TestScriptToRefactor
 {
     public class SmartWebCommandGroup
     {

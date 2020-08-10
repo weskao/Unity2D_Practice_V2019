@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace TestScript
+namespace TestScriptToRefactor
 {
     public class ShopModel
     {

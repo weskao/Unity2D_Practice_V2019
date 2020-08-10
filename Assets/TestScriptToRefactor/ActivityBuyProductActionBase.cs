@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TestScript
+namespace TestScriptToRefactor
 {
     public class ActivityBuyProductActionBase : MonoBehaviour
     {

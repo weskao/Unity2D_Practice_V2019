@@ -1,6 +1,6 @@
 ﻿using UnityEngine.UI;
 
-namespace TestScript
+namespace TestScriptToRefactor
 {
     public class TextMeshProUGUI : Text
     {
