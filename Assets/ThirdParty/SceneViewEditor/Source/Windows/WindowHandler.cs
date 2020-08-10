@@ -50,7 +50,14 @@ namespace Editor.SceneViewEditor.Source.Windows
                     if (_customWindows[i].Transform == Selection.activeTransform)
                     {
                         var window = GetNextHandleWindow(_customWindows[i]);
-                        Selection.SetActiveObjectWithContext(window?.Transform, null);
+                        if (window == null)
+                        {
+                            Selection.SetActiveObjectWithContext(null, null);
+                        }
+                        else
+                        {
+                            Selection.SetActiveObjectWithContext(window.Transform, null);
+                        }
                     }
 
                     _customWindows.RemoveAt(i);
@@ -98,7 +105,7 @@ namespace Editor.SceneViewEditor.Source.Windows
                 return WorldToScreenPoint(newPosition);
             }
 
-            return position;
+            return WorldToScreenPoint(position);
         }
 
         private Vector2 WorldToScreenPoint(Vector2 transformPosition)

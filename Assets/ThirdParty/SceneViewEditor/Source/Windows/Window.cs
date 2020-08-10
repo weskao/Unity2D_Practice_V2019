@@ -8,11 +8,29 @@ namespace Editor.SceneViewEditor.Source.Windows
 {
     public class Window : IWindow
     {
-        public int Id => _settings.Id;
+        public int Id
+        {
+            get
+            {
+                return _settings.Id;
+            }
+        }
 
-        public bool IsActive => _settings.IsActive && Transform != null;
+        public bool IsActive
+        {
+            get
+            {
+                return _settings.IsActive && Transform != null;
+            }
+        }
 
-        public Transform Transform => _settings.Transform;
+        public Transform Transform
+        {
+            get
+            {
+                return _settings.GetTransform();
+            }
+        }
 
         private static bool _isCloseWindowExecuted;
         private static bool _isEscapeKeyPressed;
@@ -63,7 +81,7 @@ namespace Editor.SceneViewEditor.Source.Windows
                 return;
             }
 
-            Selection.SetActiveObjectWithContext(_settings.Transform, null);
+            Selection.SetActiveObjectWithContext(_settings.GetTransform(), null);
         }
 
         private void HandleFocusedWindowEvents(int transformId)
@@ -122,7 +140,7 @@ namespace Editor.SceneViewEditor.Source.Windows
 
         private void DisplayScrollViewContent()
         {
-            var transforms = _settings.Transform.GetAllParentsAndSelf();
+            var transforms = _settings.GetTransform().GetAllParentsAndSelf();
             for (var i = transforms.Count - 1; i >= 0; i--)
             {
                 GUILayout.BeginHorizontal();
@@ -133,7 +151,7 @@ namespace Editor.SceneViewEditor.Source.Windows
                     Selection.SetActiveObjectWithContext(transforms[i], null);
                     GUI.FocusWindow(transforms[i].GetInstanceID());
 
-                    Debug.Log($"[#{transforms[i].name}] copy success!");
+                    Debug.Log(string.Format("${0} copy success!", transforms[i].name));
                 }
 
                 if (i == 0)
@@ -159,18 +177,31 @@ namespace Editor.SceneViewEditor.Source.Windows
 
         public class Settings
         {
-            public int Id => Transform.GetInstanceID();
+            public int Id
+            {
+                get
+                {
+                    return GetTransform().GetInstanceID();
+                }
+            }
+
             public bool IsActive { get; set; }
             public Rect WindowSize { get; set; }
             public Vector2 ScrollPosition { get; set; }
-            public Transform Transform { get; }
+
+            private readonly Transform transform;
+
+            public Transform GetTransform()
+            {
+                return transform;
+            }
 
             public Settings(bool isActive, Rect windowSize, Vector2 scrollPosition, Transform transform)
             {
                 IsActive = isActive;
                 WindowSize = windowSize;
                 ScrollPosition = scrollPosition;
-                Transform = transform;
+                this.transform = transform;
             }
         }
 
