@@ -1,35 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TestScriptToRefactor.TestCaseOne;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace TestScriptToRefactor.TestCaseTwo
+namespace TestScriptToRefactor.TestCaseTwo.MainFiles
 {
-    [Serializable]
-    public class CoinDetail
-    {
-        public Button coinLengthSwitchButton;
-
-        public Animator switchCoinLengthAnimator;
-
-        public TextMeshProUGUI completeCoinText;
-
-        public long MaxValueToShowCoinDetail
-        {
-            get
-            {
-                return 999999999;
-            }
-        }
-
-        public void SetButtonVisibility(bool isVisible)
-        {
-            coinLengthSwitchButton.gameObject.SetActive(isVisible);
-        }
-    }
-
     public class BaseRankingInfoScrollItem : ScrollItem, IPointerClickHandler
     {
         private static readonly int DetailHash = Animator.StringToHash("Detail");
@@ -73,6 +49,8 @@ namespace TestScriptToRefactor.TestCaseTwo
         private string CROWN_IMAGE_PATH = UiPathDefine.RankingCrownImage;
         private string GAME_ICON_PATH = UiPathDefine.RankingGameBanner;
 
+        public string Name { get; set; }
+
         protected RankInfo _rankInfo = null;
         protected string _memberId = string.Empty;
 
@@ -100,7 +78,8 @@ namespace TestScriptToRefactor.TestCaseTwo
 
         private void ShowHideCompleteValue()
         {
-            _coinDetail.switchCoinLengthAnimator.SetBool(DetailHash, !_coinDetail.switchCoinLengthAnimator.GetBool(DetailHash));
+            _coinDetail.switchCoinLengthAnimator.SetBool(DetailHash,
+                !_coinDetail.switchCoinLengthAnimator.GetBool(DetailHash));
         }
 
         public void UpdateItem(int idx)
@@ -110,7 +89,7 @@ namespace TestScriptToRefactor.TestCaseTwo
             if (idx < 0 || idx >= list.Count)
                 return;
 
-            RankInfo info = list[idx];
+            var info = list[idx];
 
             SetData(info.memberID, list[idx]);
 
@@ -162,14 +141,14 @@ namespace TestScriptToRefactor.TestCaseTwo
             else
             {
                 //int hallIdx = RankingModel.Instance.nowHallIdx;
-                int hallId = RankingModel.Instance.HallIndexToReverseHallId();
+                var hallId = RankingModel.Instance.HallIndexToReverseHallId();
                 //int denom = MachineModel.Instance.GetDenomByHallId( hallId );
-                int denom = BaseDataManager.HallDataRecords.GetDenomByHallId(BaseDataManager.HallDataRecords.GameHallType.All, hallId);
+                var denom = BaseDataManager.HallDataRecords.GetDenomByHallId(
+                    BaseDataManager.HallDataRecords.GameHallType.All, hallId);
 
                 if (null != _tmpWinCoin)
-                {
                     _tmpWinCoin.text = CommonModel.Instance.GetCreditText(info.win);
-                    /*
+                /*
                     if ( RankingModel.Instance.nowCategory == RankingType.Rich ) {
                         _tmpWinCoin.text = info.win.CentToCredit();
                     }
@@ -177,17 +156,11 @@ namespace TestScriptToRefactor.TestCaseTwo
                         _tmpWinCoin.text = CommonModel.Instance.GetCreditTextByDenomNoDecimal( info.win, denom );
                     }
                     */
-                }
 
                 if (null != _tmpMutiply)
-                {
                     _tmpMutiply.text = string.Format(DataTableManager.Instance.GetText("RANKING_MULTIPLY"), info.mag);
-                }
 
-                if (null != _tmpMachineNum)
-                {
-                    _tmpMachineNum.text = string.Empty;
-                }
+                if (null != _tmpMachineNum) _tmpMachineNum.text = string.Empty;
             }
 
             SetCard(info.useItemList);
@@ -265,8 +238,8 @@ namespace TestScriptToRefactor.TestCaseTwo
         {
             if (rank >= 1 && rank <= 3)
             {
-                string path = string.Format(CROWN_IMAGE_PATH, rank);
-                _imgCrown.sprite = new Sprite();
+                var path = string.Format(CROWN_IMAGE_PATH, rank);
+                // _imgCrown.sprite = Sprite.Create();
                 _imgCrown.SetNativeSize();
                 _imgCrown.gameObject.SetActive(true);
             }
@@ -307,17 +280,15 @@ namespace TestScriptToRefactor.TestCaseTwo
         protected void SetJpIcon()
         {
             if (null != _rankInfo)
-            {
                 if (_jpIcon != null)
                 {
                     // _jpIcon.SetActive(_rankInfo.HaveJp());
                 }
-            }
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (!eventData.pointerEnter.GetInstanceID().Equals(this.gameObject.GetInstanceID()))
+            if (!eventData.pointerEnter.GetInstanceID().Equals(gameObject.GetInstanceID()))
                 return;
 
             if (null != _rankInfo)
@@ -336,15 +307,15 @@ namespace TestScriptToRefactor.TestCaseTwo
                 if (null == userItemList || userItemList.Count == 0)
                     return;
 
-                ItemInfo itemInfo = BaseDataManager.ItemCardRecords.GetItem(userItemList[0]);
+                var itemInfo = BaseDataManager.ItemCardRecords.GetItem(userItemList[0]);
 
                 if (null != itemInfo)
                 {
-                    string levelColor = ((ItemRare)itemInfo.itemRare).ToString();
+                    var levelColor = ((ItemRare)itemInfo.itemRare).ToString();
 
                     _usedCard.gameObject.SetActive(true);
                     // _usedCard.sprite = AssetsManager.Instance.LoadAsset<Sprite>(string.Format(UiPathDefine.RankingCard, levelcolor));
-                    _usedCard.sprite = new Sprite();
+                    // _usedCard.sprite = Sprite.Create();
                 }
             }
         }

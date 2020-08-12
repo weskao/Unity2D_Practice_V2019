@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TestScriptToRefactor.TestCaseOne
+namespace TestScriptToRefactor.TestCaseOne.MainFiles
 {
     public class ActivityBuyProductActionBase : MonoBehaviour
     {

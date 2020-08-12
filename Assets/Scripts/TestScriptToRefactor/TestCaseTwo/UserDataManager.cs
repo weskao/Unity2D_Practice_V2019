@@ -1,4 +1,6 @@
-﻿namespace TestScriptToRefactor.TestCaseTwo
+﻿using TestScriptToRefactor.TestCaseTwo.MainFiles;
+
+namespace TestScriptToRefactor.TestCaseTwo
 {
     public class UserDataManager
     {

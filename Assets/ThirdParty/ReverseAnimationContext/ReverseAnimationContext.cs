@@ -28,29 +28,31 @@ namespace ThirdParty
 
             float clipLength = clip.length;
 
-            var curves = AnimationUtility.GetAllCurves(clip, true);
+            // var curves = AnimationUtility.GetAllCurves(clip, true);
+            var curves = AnimationUtility.GetObjectReferenceCurveBindings(clip);
+
             clip.ClearCurves();
 
-            foreach (AnimationClipCurveData curve in curves)
-            {
-                var keys = curve.curve.keys;
-                int keyCount = keys.Length;
-                var curvePostWrapMode = curve.curve.postWrapMode;
-                curve.curve.postWrapMode = curve.curve.preWrapMode;
-                curve.curve.preWrapMode = curvePostWrapMode;
-                for (int i = 0; i < keyCount; i++)
-                {
-                    Keyframe K = keys[i];
-                    K.time = clipLength - K.time;
-                    var tmp = -K.inTangent;
-                    K.inTangent = -K.outTangent;
-                    K.outTangent = tmp;
-                    keys[i] = K;
-                }
-
-                curve.curve.keys = keys;
-                clip.SetCurve(curve.path, curve.type, curve.propertyName, curve.curve);
-            }
+            // foreach (var curve in curves)
+            // {
+            //     var keys = curve.curve.keys;
+            //     int keyCount = keys.Length;
+            //     var curvePostWrapMode = curve.curve.postWrapMode;
+            //     curve.curve.postWrapMode = curve.curve.preWrapMode;
+            //     curve.curve.preWrapMode = curvePostWrapMode;
+            //     for (int i = 0; i < keyCount; i++)
+            //     {
+            //         Keyframe K = keys[i];
+            //         K.time = clipLength - K.time;
+            //         var tmp = -K.inTangent;
+            //         K.inTangent = -K.outTangent;
+            //         K.outTangent = tmp;
+            //         keys[i] = K;
+            //     }
+            //
+            //     curve.curve.keys = keys;
+            //     clip.SetCurve(curve.path, curve.type, curve.propertyName, curve.curve);
+            // }
 
             var events = AnimationUtility.GetAnimationEvents(clip);
             if (events.Length > 0)
