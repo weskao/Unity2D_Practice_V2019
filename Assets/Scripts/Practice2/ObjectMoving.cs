@@ -9,18 +9,14 @@ namespace Practice2
     {
         public Image[] images;
         public Text text;
-        public string id;
+        public int id;
     }
 
-    [Serializable]
-    public class MyGroup
+    public class GroupA : MonoBehaviour
     {
-        public Button[] buttons;
-        public Transform transform;
-        public int number;
+        private GameObject _gameObject2;
 
-        [SerializeField]
-        private Profile _profile;
+        private bool _isForward2 = true;
     }
 
     public class ObjectMoving : MonoBehaviour
@@ -28,7 +24,13 @@ namespace Practice2
         private static readonly int Forward = Animator.StringToHash("Forward");
         private static readonly int Backward = Animator.StringToHash("Backward");
 
-        public GameObject gameObject;
+        public Profile profile;
+
+        [SerializeField]
+        private GroupA _groupA;
+
+        [SerializeField]
+        private GameObject _gameObject;
 
         private static bool _isForward = true;
 
@@ -43,9 +45,17 @@ namespace Practice2
         // [SerializeField]
         // private Button _triggerButton;
 
+        private void Awake()
+        {
+            if (_myGroup != null)
+            {
+                Debug.Log($"number = {_myGroup.number}");
+            }
+        }
+
         public void MoveSquare()
         {
-            transformPosition = gameObject.transform.position;
+            transformPosition = _gameObject.transform.position;
 
             _animator.SetTrigger(_isForward ? Forward : Backward);
             _isForward = !_isForward;
