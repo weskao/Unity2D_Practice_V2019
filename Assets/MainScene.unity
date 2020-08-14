@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 219722646}
   - component: {fileID: 219722647}
   m_Layer: 5
-  m_Name: Yellow
+  m_Name: Toggle_Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2397,8 +2397,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1781632624}
   - component: {fileID: 1781632625}
+  - component: {fileID: 1781632626}
   m_Layer: 5
-  m_Name: Red
+  m_Name: Toggle_Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2471,7 +2472,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1898882440}
+      - m_Target: {fileID: 0}
         m_MethodName: 
         m_Mode: 1
         m_Arguments:
@@ -2483,6 +2484,21 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   m_IsOn: 1
+--- !u!114 &1781632626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781632623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e778dfab5c4040a74208e85dda81bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _displayText: {fileID: 1104392891}
+  _toggleGroup: {fileID: 1898882440}
+  _currentToggle: {fileID: 1781632625}
 --- !u!1 &1781686826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2643,7 +2659,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1898882441}
   - component: {fileID: 1898882440}
-  - component: {fileID: 1898882442}
   m_Layer: 0
   m_Name: Toggle Group
   m_TagString: Untagged
@@ -2681,20 +2696,6 @@ Transform:
   m_Father: {fileID: 1033914545}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1898882442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1898882439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7e778dfab5c4040a74208e85dda81bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _displayText: {fileID: 939872082}
-  _toggleGroup: {fileID: 1898882440}
 --- !u!1 &1927193396
 GameObject:
   m_ObjectHideFlags: 0
@@ -2706,7 +2707,7 @@ GameObject:
   - component: {fileID: 1927193397}
   - component: {fileID: 1927193398}
   m_Layer: 5
-  m_Name: Green
+  m_Name: Toggle_Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
