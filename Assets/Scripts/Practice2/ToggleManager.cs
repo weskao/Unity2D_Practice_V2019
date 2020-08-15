@@ -20,7 +20,7 @@ namespace Practice2
 
         private void Start()
         {
-            // way1: Dynamic bind listener
+            // way1: Static bind listener
             if (_currentToggle != null)
             {
                 _currentToggle.onValueChanged.AddListener(isOn => PrintInfo());
@@ -29,8 +29,8 @@ namespace Practice2
                 Debug.Log($"Bind \"onValueChanged\" event - {nameof(PrintInfo)} for {_currentToggle.name}");
             }
 
-            // way2: static
-            GameObject.Find("Toggle_Red").GetComponent<Toggle>().onValueChanged.AddListener(isOn => PrintInfo());
+            // way2: Dynamic binding
+            // GameObject.Find("Toggle_Red").GetComponent<Toggle>().onValueChanged.AddListener(isOn => PrintInfo());
 
             Debug.LogFormat($"<color=green>Current select option is:{CurrentSelection}</color>");
         }
