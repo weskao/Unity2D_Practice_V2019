@@ -1,8 +1,12 @@
+using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
+using UnityEditor;
 
-namespace ThirdParty.HierarchyHighlighter.Editor
+using Scripts.Utility;
+
+namespace Assets.Editor
 {
     [InitializeOnLoad]
     public class HierarchyHighlightManager
@@ -13,7 +17,15 @@ namespace ThirdParty.HierarchyHighlighter.Editor
         //
         //==============================================================================
 
+
+
         public static readonly Color DEFAULT_COLOR_HIERARCHY_SELECTED = new Color(0.243f, 0.4901f, 0.9058f, 1f);
+
+
+
+
+
+
 
         //==============================================================================
         //
@@ -21,17 +33,27 @@ namespace ThirdParty.HierarchyHighlighter.Editor
         //
         //==============================================================================
 
+
+
         static HierarchyHighlightManager()
         {
             EditorApplication.hierarchyWindowItemOnGUI -= HierarchyHighlight_OnGUI;
             EditorApplication.hierarchyWindowItemOnGUI += HierarchyHighlight_OnGUI;
         }
 
+
+
+
+
+
+
         //==============================================================================
         //
         //                                    EVENTS
         //
         //==============================================================================
+
+
 
         private static void HierarchyHighlight_OnGUI(int inSelectionID, Rect inSelectionRect)
         {
@@ -41,7 +63,7 @@ namespace ThirdParty.HierarchyHighlighter.Editor
             {
                 HierarchyHighlighter Label = GO_Label.GetComponent<HierarchyHighlighter>();
 
-                if (Label != null && Event.current.type == EventType.Repaint)
+                if(Label != null && Event.current.type == EventType.Repaint)
                 {
                     #region Determine Styling
 
@@ -51,9 +73,9 @@ namespace ThirdParty.HierarchyHighlighter.Editor
                     Color TextCol = Label.Text_Color;
                     FontStyle TextStyle = Label.TextStyle;
 
-                    if (!Label.isActiveAndEnabled)
+                    if(!Label.isActiveAndEnabled)
                     {
-                        if (Label.Custom_Inactive_Colors)
+                        if(Label.Custom_Inactive_Colors)
                         {
                             BKCol = Label.Background_Color_Inactive;
                             TextCol = Label.Text_Color_Inactive;
@@ -61,16 +83,18 @@ namespace ThirdParty.HierarchyHighlighter.Editor
                         }
                         else
                         {
-                            if (BKCol != HierarchyHighlighter.DEFAULT_BACKGROUND_COLOR)
+                            if(BKCol != HierarchyHighlighter.DEFAULT_BACKGROUND_COLOR)
                                 BKCol.a = BKCol.a * 0.5f; //Reduce opacity by half
 
                             TextCol.a = TextCol.a * 0.5f;
                         }
                     }
 
-                    #endregion Determine Styling
+                    #endregion
+
 
                     Rect Offset = new Rect(inSelectionRect.position + new Vector2(2f, 0f), inSelectionRect.size);
+
 
                     #region Draw Background
 
@@ -93,7 +117,8 @@ namespace ThirdParty.HierarchyHighlighter.Editor
                             EditorGUI.DrawRect(BackgroundOffset, BKCol);
                     }
 
-                    #endregion Draw Background
+                    #endregion
+
 
                     EditorGUI.LabelField(Offset, GO_Label.name, new GUIStyle()
                     {
