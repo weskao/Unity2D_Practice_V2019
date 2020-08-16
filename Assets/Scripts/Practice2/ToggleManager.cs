@@ -1,9 +1,7 @@
 ﻿using System.Linq;
+using Practice2.ToggleFamily;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
-using Toggle = UnityEngine.UI.Toggle;
 
 namespace Practice2
 {
@@ -52,7 +50,15 @@ namespace Practice2
             if (activeToggle != null)
             {
                 Debug.LogFormat($"<color=white>Current Selection is : {activeToggle.name}</color>");
-                SetTextColor(activeToggle.GetComponentInChildren<Text>().color);
+
+                var textColor = activeToggle.GetComponentInChildren<Text>().color;
+
+                Debug.Log("textColor = " + textColor);
+                SetTextColor(textColor);
+                // var colorToggle_Color = activeToggle.GetComponentInChildren<ColorToggle>().color;
+                //
+                // Debug.Log("colorToggle_Color = " + colorToggle_Color);
+                // SetTextColor(colorToggle_Color);
             }
         }
 
