@@ -22,7 +22,10 @@ namespace Practice2
 
         private void Start()
         {
-            _isTextVisible = _displayText.isActiveAndEnabled;
+            if (_displayText != null)
+            {
+                _isTextVisible = _displayText.isActiveAndEnabled;
+            }
 
             // way1: Static bind listener
             // if (_currentToggle != null)
