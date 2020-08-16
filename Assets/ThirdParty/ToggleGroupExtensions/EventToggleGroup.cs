@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace ToggleGroupExtensions
+namespace ThirdParty.ToggleGroupExtensions
 {
     [RequireComponent(typeof(ToggleGroup))]
     public class EventToggleGroup : MonoBehaviour
