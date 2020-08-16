@@ -1,6 +1,9 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Toggle = UnityEngine.UI.Toggle;
 
 namespace Practice2
 {
@@ -12,14 +15,15 @@ namespace Practice2
         [SerializeField]
         private ToggleGroup _toggleGroup;
 
-        [SerializeField]
-        private Toggle CurrentSelection => _toggleGroup.ActiveToggles().FirstOrDefault();
+        private bool _isTextVisible;
 
-        [SerializeField]
-        private Toggle _currentToggle;
+        // [SerializeField]
+        // private Toggle _currentToggle;
 
         private void Start()
         {
+            _isTextVisible = _displayText.isActiveAndEnabled;
+
             // way1: Static bind listener
             // if (_currentToggle != null)
             // {
@@ -41,15 +45,31 @@ namespace Practice2
 
         public void CategoryToggleChanged()
         {
-            Debug.Log($"Current Selection is : {_toggleGroup.ActiveToggles().FirstOrDefault()}");
+            var activeToggle = _toggleGroup.ActiveToggles().FirstOrDefault();
+            if (activeToggle != null)
+            {
+                Debug.LogFormat($"<color=white>Current Selection is : {activeToggle.name}</color>");
+                SetTextColor(activeToggle.GetComponentInChildren<Text>().color);
+            }
+        }
+
+        private void SetTextColor(Color color)
+        {
+            _displayText.color = color;
+        }
+
+        public void ShowHideText()
+        {
+            _displayText.gameObject.SetActive(!_isTextVisible);
+            _isTextVisible = !_isTextVisible;
         }
 
         public void IsOn()
         {
-            if (_currentToggle != null)
-            {
-                Debug.LogFormat(_currentToggle.isOn ? "<color=blue>On</color>" : "Off");
-            }
+            // if (_currentToggle != null)
+            // {
+            //     Debug.LogFormat(_currentToggle.isOn ? "<color=blue>On</color>" : "Off");
+            // }
         }
     }
 }
