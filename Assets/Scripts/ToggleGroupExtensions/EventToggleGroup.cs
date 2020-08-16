@@ -1,13 +1,15 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace ThirdParty.ComponentExtensions
+namespace ToggleGroupExtensions
 {
     [RequireComponent(typeof(ToggleGroup))]
     public class EventToggleGroup : MonoBehaviour
     {
+        [Serializable]
         public class ToggleEvent : UnityEvent<Toggle>
         {
         }

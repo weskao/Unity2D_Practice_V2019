@@ -23,14 +23,14 @@ namespace Practice2
             // way1: Static bind listener
             // if (_currentToggle != null)
             // {
-            //     _currentToggle.onValueChanged.AddListener(isOn => PrintInfo());
+            //     _currentToggle.onValueChanged.AddListener(isOn => CategoryToggleChanged());
             //
             //     Debug.Log($"Current toggle name is: {_currentToggle.name}");
-            //     Debug.Log($"Bind \"onValueChanged\" event - {nameof(PrintInfo)} for {_currentToggle.name}");
+            //     Debug.Log($"Bind \"onValueChanged\" event - {nameof(CategoryToggleChanged)} for {_currentToggle.name}");
             // }
 
             // way2: Dynamic binding
-            // GameObject.Find("Toggle_Red").GetComponent<Toggle>().onValueChanged.AddListener(isOn => PrintInfo());
+            // GameObject.Find("Toggle_Red").GetComponent<Toggle>().onValueChanged.AddListener(isOn => CategoryToggleChanged());
 
             // bind IsOn event
             // var toggleRed = GameObject.Find("Toggle_Red").GetComponent<Toggle>();
@@ -39,9 +39,9 @@ namespace Practice2
             // Debug.LogFormat($"<color=green>Current select option is:{CurrentSelection}</color>");
         }
 
-        public void PrintInfo()
+        public void CategoryToggleChanged()
         {
-            Debug.Log("Toggle value changed!");
+            Debug.Log($"Current Selection is : {_toggleGroup.ActiveToggles().FirstOrDefault()}");
         }
 
         public void IsOn()
