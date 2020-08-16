@@ -481,6 +481,7 @@ GameObject:
   - component: {fileID: 219722646}
   - component: {fileID: 219722647}
   - component: {fileID: 219722648}
+  - component: {fileID: 219722649}
   m_Layer: 5
   m_Name: Toggle_Yellow
   m_TagString: Untagged
@@ -575,6 +576,19 @@ MonoBehaviour:
   Text_Color_Inactive: {r: 0, g: 0, b: 0, a: 1}
   TextStyle_Inactive: 0
   Background_Color_Inactive: {r: 0.306, g: 0.396, b: 0.612, a: 1}
+--- !u!114 &219722649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 219722645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d051f4873c644c1795c28e32c73825bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0.35686275, g: 0.3372549, b: 0.050980397, a: 0}
 --- !u!1 &297839341
 GameObject:
   m_ObjectHideFlags: 0
@@ -2503,6 +2517,7 @@ GameObject:
   - component: {fileID: 1781632624}
   - component: {fileID: 1781632625}
   - component: {fileID: 1781632627}
+  - component: {fileID: 1781632626}
   m_Layer: 5
   m_Name: Toggle_Red
   m_TagString: Untagged
@@ -2589,6 +2604,19 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   m_IsOn: 1
+--- !u!114 &1781632626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781632623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d051f4873c644c1795c28e32c73825bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0.8196079, g: 0.121568635, b: 0.121568635, a: 0}
 --- !u!114 &1781632627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2882,6 +2910,7 @@ GameObject:
   - component: {fileID: 1927193397}
   - component: {fileID: 1927193398}
   - component: {fileID: 1927193399}
+  - component: {fileID: 1927193400}
   m_Layer: 5
   m_Name: Toggle_Green
   m_TagString: Untagged
@@ -2976,6 +3005,19 @@ MonoBehaviour:
   Text_Color_Inactive: {r: 0, g: 0, b: 0, a: 1}
   TextStyle_Inactive: 0
   Background_Color_Inactive: {r: 0.306, g: 0.396, b: 0.612, a: 1}
+--- !u!114 &1927193400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927193396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d051f4873c644c1795c28e32c73825bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0.06666667, g: 0.37647063, b: 0.13725491, a: 0}
 --- !u!1 &1945276578
 GameObject:
   m_ObjectHideFlags: 0
