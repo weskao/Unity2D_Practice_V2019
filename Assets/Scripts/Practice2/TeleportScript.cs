@@ -21,7 +21,7 @@ namespace Practice2
 
         private void Awake()
         {
-            EventManager.OnClicked += Teleoprt;
+            EventManager.OnClicked += Teleport;
 
             foreach (var buttonObject in _buttonObjects)
             {
@@ -31,7 +31,7 @@ namespace Practice2
 
         private void OnDestroy()
         {
-            EventManager.OnClicked -= Teleoprt;
+            EventManager.OnClicked -= Teleport;
 
             foreach (var buttonObject in _buttonObjects)
             {
@@ -42,14 +42,19 @@ namespace Practice2
         private void AddNumber(string buttonName)
         {
             _number++;
-            Debug.Log(string.Format("Invoke {0}.{1} method, number = {2}",
-                buttonName, MethodBase.GetCurrentMethod().Name, _number));
+            Debug.Log($"Invoke {buttonName}.{MethodBase.GetCurrentMethod().Name} method, number = {_number}");
         }
 
-        private void Teleoprt()
+        private void Teleport()
         {
             var position = transform.position;
-            position.y = UnityEngine.Random.Range(1.0f, 3f);
+
+            if (Camera.main != null)
+            {
+                var screenPosition = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight, 0));
+                position.y = UnityEngine.Random.Range(0f, screenPosition.y / 2);
+            }
+
             transform.position = position;
         }
     }

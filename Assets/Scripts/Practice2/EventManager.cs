@@ -10,7 +10,7 @@ namespace Practice2
 
         private void OnGUI()
         {
-            if (GUI.Button(new Rect(Screen.width / 2 - 50, 5, 100, 30), "Click"))
+            if (GUI.Button(new Rect((float)Screen.width / 2, 5, 100, 30), "Click"))
             {
                 if (OnClicked != null)
                 {
