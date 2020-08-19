@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Practice3
 {
     // Unity Challenge: PoolManager - https://reurl.cc/Ez7k1k
     public class PoolManager : MonoBehaviour
     {
+        [SerializeField]
+        private GameObject _bulletContainer;
+
         [SerializeField]
         private GameObject _bulletPrefab;
 
@@ -43,6 +46,11 @@ namespace Practice3
             for (var i = 0; i < amountOfBullets; i++)
             {
                 var bullet = Instantiate(_bulletPrefab);
+                bullet.transform.position = new Vector3(bullet.transform.position.x,
+                                    bullet.transform.position.y - bullet.GetComponent<Image>().sprite.rect.height - i * 5);
+
+                bullet.transform.parent = _bulletContainer.transform;
+
                 _bulletPool.Add(bullet);
             }
 
