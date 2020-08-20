@@ -46,9 +46,10 @@ namespace Practice3
             for (var i = 0; i < amountOfBullets; i++)
             {
                 var bullet = Instantiate(_bulletPrefab);
-                bullet.transform.position = new Vector3(bullet.transform.position.x,
-                                    bullet.transform.position.y - bullet.GetComponent<Image>().sprite.rect.height - i * 5);
+                var oldBulletPosition = bullet.transform.position;
+                var newPositionY = oldBulletPosition.y - bullet.GetComponent<Image>().sprite.rect.height * i;
 
+                bullet.transform.position = new Vector3(oldBulletPosition.x, newPositionY);
                 bullet.transform.parent = _bulletContainer.transform;
 
                 _bulletPool.Add(bullet);
