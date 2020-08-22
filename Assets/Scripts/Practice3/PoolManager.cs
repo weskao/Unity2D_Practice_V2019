@@ -42,8 +42,18 @@ namespace Practice3
             _bulletPool = GenerateBullets(10);
         }
 
-        public void RequestBullet()
+        public GameObject RequestBullet()
         {
+            foreach (var bullet in _bulletPool)
+            {
+                if (bullet.activeInHierarchy == false)
+                {
+                    bullet.Show();
+                    return bullet;
+                }
+            }
+
+            return null;
         }
 
         private List<GameObject> GenerateBullets(int amountOfBullets)
