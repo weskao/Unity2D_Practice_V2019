@@ -17,6 +17,8 @@ namespace Practice3
         [SerializeField]
         private List<GameObject> _bulletPool;
 
+        private int _amountOfBullets = 10;
+
         private static PoolManager _instance;
 
         public static PoolManager Instance
@@ -39,7 +41,7 @@ namespace Practice3
 
         private void Start()
         {
-            _bulletPool = GenerateBullets(10);
+            _bulletPool = GenerateBullets(_amountOfBullets);
         }
 
         public GameObject RequestBullet()
@@ -60,18 +62,26 @@ namespace Practice3
         {
             for (var i = 0; i < amountOfBullets; i++)
             {
-                var bullet = Instantiate(_bulletPrefab);
-                var oldBulletPosition = bullet.transform.position;
-                var newPositionY = oldBulletPosition.y - bullet.GetComponent<Image>().sprite.rect.height * i;
+                var bullet = CreateBullet(i);
 
                 bullet.Hide();
-                bullet.transform.position = new Vector3(oldBulletPosition.x, newPositionY);
-                bullet.transform.parent = _bulletContainer.transform;
 
                 _bulletPool.Add(bullet);
             }
 
             return _bulletPool;
+        }
+
+        private GameObject CreateBullet(int offsetY)
+        {
+            var bullet = Instantiate(_bulletPrefab);
+            var oldBulletPosition = bullet.transform.position;
+            var newPositionY = oldBulletPosition.y - bullet.GetComponent<Image>().sprite.rect.height * offsetY;
+
+            bullet.transform.position = new Vector3(oldBulletPosition.x, newPositionY);
+            bullet.transform.parent = _bulletContainer.transform;
+
+            return bullet;
         }
     }
 }

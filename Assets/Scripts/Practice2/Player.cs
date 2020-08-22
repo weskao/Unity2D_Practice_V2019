@@ -14,7 +14,6 @@ namespace Practice2
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 var bullet = PoolManager.Instance.RequestBullet();
-                // bullet.transform.position = Vector3.zero;
 
                 // Communicate with the object pool system
                 // Request bullet
