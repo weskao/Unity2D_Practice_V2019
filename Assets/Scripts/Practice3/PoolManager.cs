@@ -41,6 +41,10 @@ namespace Practice3
             _bulletPool = GenerateBullets(10);
         }
 
+        public void RequestBullet()
+        {
+        }
+
         private List<GameObject> GenerateBullets(int amountOfBullets)
         {
             for (var i = 0; i < amountOfBullets; i++)
