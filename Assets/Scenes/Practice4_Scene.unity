@@ -559,7 +559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprites:
   - {fileID: 21300000, guid: 3b64dfd144caa0f418acbed769743c51, type: 3}
-  - {fileID: 21300000, guid: ed735ac8e6584d743aeb64381c3fa2d2, type: 3}
+  - {fileID: 21300000, guid: a4d0aa562885cf049b5c88814a657067, type: 3}
   - {fileID: 21300000, guid: 012b8ef7ad8810242ac6f3993d197668, type: 3}
   _shockImage: {fileID: 1539663696}
   _controlImage: {fileID: 1350189078}
@@ -602,10 +602,10 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.41749567, g: 0.8602941, b: 0.5304855, a: 1}
-    m_HighlightedColor: {r: 0.41568628, g: 0.85882354, b: 0.5294118, a: 1}
-    m_PressedColor: {r: 0.3175822, g: 0.6544118, b: 0.4314074, a: 1}
-    m_SelectedColor: {r: 0.41568628, g: 0.85882354, b: 0.5294118, a: 1}
+    m_NormalColor: {r: 0.8867924, g: 0.5087342, b: 0.16313636, a: 1}
+    m_HighlightedColor: {r: 0.8862746, g: 0.50980395, b: 0.16470589, a: 1}
+    m_PressedColor: {r: 0.6603774, g: 0.40846968, b: 0.17755428, a: 1}
+    m_SelectedColor: {r: 0.8862746, g: 0.50980395, b: 0.16470589, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
