@@ -55,7 +55,7 @@ namespace Practice3
                 }
             }
 
-            return null;
+            return CreateBullet(_bulletPool.Count);
         }
 
         private List<GameObject> GenerateBullets(int amountOfBullets)
@@ -65,8 +65,6 @@ namespace Practice3
                 var bullet = CreateBullet(i);
 
                 bullet.Hide();
-
-                _bulletPool.Add(bullet);
             }
 
             return _bulletPool;
@@ -80,6 +78,8 @@ namespace Practice3
 
             bullet.transform.position = new Vector3(oldBulletPosition.x, newPositionY);
             bullet.transform.parent = _bulletContainer.transform;
+
+            _bulletPool.Add(bullet);
 
             return bullet;
         }
