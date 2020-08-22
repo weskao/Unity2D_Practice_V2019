@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -53,6 +54,7 @@ namespace Practice3
                 var oldBulletPosition = bullet.transform.position;
                 var newPositionY = oldBulletPosition.y - bullet.GetComponent<Image>().sprite.rect.height * i;
 
+                bullet.Hide();
                 bullet.transform.position = new Vector3(oldBulletPosition.x, newPositionY);
                 bullet.transform.parent = _bulletContainer.transform;
 
