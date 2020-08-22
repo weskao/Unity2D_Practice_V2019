@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Practice2
+namespace Practice2.Manager
 {
     public class EventManager : MonoBehaviour
     {

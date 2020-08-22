@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Practice2.Manager;
+using UnityEngine;
 
 namespace Practice2
 {

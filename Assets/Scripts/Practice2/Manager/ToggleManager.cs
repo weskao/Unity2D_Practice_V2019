@@ -1,9 +1,8 @@
 ﻿using System.Linq;
-using Practice2.ToggleFamily;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Practice2
+namespace Practice2.Manager
 {
     public class ToggleManager : MonoBehaviour
     {

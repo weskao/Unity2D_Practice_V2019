@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Practice2.Manager;
 using UnityEngine;
 using UnityEngine.UI;
 
