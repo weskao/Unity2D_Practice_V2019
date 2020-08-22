@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,7 +31,7 @@ namespace Practice4
                 }
                 else
                 {
-                    _shockImage.gameObject.SetActive(false);
+                    _shockImage.Hide();
 
                     StopCoroutine(WaitMoment());
                 }
@@ -41,7 +42,7 @@ namespace Practice4
         {
             yield return new WaitForSeconds(TimeToWaitShowShockImage);
 
-            _shockImage.gameObject.SetActive(true);
+            _shockImage.Show();
         }
 
         public void OnButtonClicked()
