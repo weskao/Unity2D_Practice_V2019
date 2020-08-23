@@ -3,7 +3,7 @@ using Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Practice3
+namespace Practice3_ObjectPool
 {
     // Unity Challenge: PoolManager - https://reurl.cc/Ez7k1k
     public class PoolManager : MonoBehaviour

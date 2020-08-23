@@ -1,5 +1,4 @@
-﻿using System;
-using Practice3;
+﻿using Practice3_ObjectPool;
 using UnityEngine;
 
 namespace Practice2
