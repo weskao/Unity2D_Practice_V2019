@@ -76,7 +76,7 @@ namespace Practice3
             var oldBulletPosition = bullet.transform.position;
             var newPositionY = oldBulletPosition.y - bullet.GetComponent<Image>().sprite.rect.height * offsetY;
 
-            bullet.transform.position = new Vector3(oldBulletPosition.x, newPositionY);
+            bullet.transform.position = new Vector2(oldBulletPosition.x, newPositionY);
             bullet.transform.parent = _bulletContainer.transform;
 
             _bulletPool.Add(bullet);
