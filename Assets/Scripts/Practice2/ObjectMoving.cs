@@ -60,5 +60,42 @@ namespace Practice2
             _animator.SetTrigger(_isForward ? Forward : Backward);
             _isForward = !_isForward;
         }
+
+        private void Update()
+        {
+            if (_gameObject.activeInHierarchy)
+            {
+                if (IsAnimationPlayDone(Forward))
+                {
+                    Debug.Log($"Forward play done.");
+                }
+                else
+                {
+                    Debug.LogFormat("<color=green>Forward not play done.</color>");
+                }
+            }
+        }
+
+        private bool IsAnimationPlayDone(int targetHash)
+        {
+            var animatorInfo = _animator.GetCurrentAnimatorStateInfo(0);
+            if (animatorInfo.shortNameHash == targetHash)
+            {
+                Debug.LogFormat($"<color=Blue>animatorInfo.normalizedTime = {animatorInfo.normalizedTime}</color>");
+
+                if (animatorInfo.normalizedTime >= 1.0f)
+                {
+                    // Debug.Log($"{targetHash} play done.");
+                    return true;
+                }
+                else
+                {
+                    // Debug.Log($"{targetHash} not play done.");
+                    return false;
+                }
+            }
+
+            return false;
+        }
     }
 }
