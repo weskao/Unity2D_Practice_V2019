@@ -17,6 +17,8 @@ namespace Practice5
             {
                 _levelUpSequencePanel.Enqueue(new LevelUpRewardItem(), OnCompleteEvent);
             }
+
+            _levelUpSequencePanel.StartCoroutineInQueue();
         }
 
         private void OnCompleteEvent()
