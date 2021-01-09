@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Practice3
+namespace Practice5
 {
     public class LevelUpSequencePanel : MonoBehaviour
     {
         private Action _onComplete;
         private Queue<IEnumerator> _levelUpPlayingQueue = new Queue<IEnumerator>();
         private Coroutine _playingCoroutine;
+        private static int _testNum = 0; // only for test
 
         private void Awake()
         {
@@ -18,6 +19,38 @@ namespace Practice3
         public void StartCoroutineInQueue()
         {
             Debug.LogFormat("<color=green>StartCoroutineInQueue</color>");
+
+            if (HasDataWaitingForPlay())
+            {
+                gameObject.SetActive(true);
+                PopupDataInQueue();
+            }
+        }
+
+        private void PopupDataInQueue()
+        {
+            PlaySequentially();
+        }
+
+        private void PlaySequentially()
+        {
+            while (HasDataWaitingForPlay())
+            {
+                Debug.Log("_levelUpPlayingQueue.Count = " + _levelUpPlayingQueue.Count);
+                DoNextReq();
+                _testNum++;
+
+                if (_testNum > 3)
+                {
+                    Debug.LogError("<color=green>Infinite!!! Error</color>");
+                    break;
+                }
+            }
+        }
+
+        private bool HasDataWaitingForPlay()
+        {
+            return _levelUpPlayingQueue.Count > 0;
         }
 
         public void Enqueue(LevelUpRewardItem levelUpRewardItem, Action callback)
@@ -46,7 +79,7 @@ namespace Practice3
 
         private IEnumerator Show(LevelUpRewardItem levelUpRewardItem)
         {
-            Debug.LogFormat("<color=yellow>Show()</color>");
+            Debug.LogFormat("<color=green>Show()</color>");
 
             yield break;
         }
