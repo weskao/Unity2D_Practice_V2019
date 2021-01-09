@@ -7,7 +7,6 @@ namespace Practice5
 {
     public class LevelUpSequencePanel : MonoBehaviour
     {
-        private Action _onComplete;
         private Queue<IEnumerator> _levelUpPlayingQueue = new Queue<IEnumerator>();
         private Coroutine _playingCoroutine;
         private static int _testNum = 0; // only for test
@@ -23,13 +22,8 @@ namespace Practice5
             if (HasDataWaitingForPlay())
             {
                 gameObject.SetActive(true);
-                PopupDataInQueue();
+                PlaySequentially();
             }
-        }
-
-        private void PopupDataInQueue()
-        {
-            PlaySequentially();
         }
 
         private void PlaySequentially()
@@ -39,6 +33,8 @@ namespace Practice5
                 Debug.Log("_levelUpPlayingQueue.Count = " + _levelUpPlayingQueue.Count);
                 DoNextReq();
                 _testNum++;
+
+                Debug.LogFormat("<color=green>===============</color>");
 
                 if (_testNum > 3)
                 {
@@ -57,8 +53,7 @@ namespace Practice5
         {
             Debug.Log($"Enqueue()");
 
-            _levelUpPlayingQueue.Enqueue(EnqueueShow(levelUpRewardItem, _onComplete));
-            _onComplete = callback;
+            _levelUpPlayingQueue.Enqueue(EnqueueShow(levelUpRewardItem, callback));
         }
 
         public void DoNextReq()
@@ -72,9 +67,10 @@ namespace Practice5
         {
             Debug.Log($"EnqueueShow()");
 
-            yield return Show(levelUpRewardItem);
+            // yield return Show(levelUpRewardItem);
+            // callback.Invoke();
 
-            callback.Invoke();
+            yield return ShowWithCallback(levelUpRewardItem, callback);
         }
 
         private IEnumerator Show(LevelUpRewardItem levelUpRewardItem)
@@ -82,6 +78,15 @@ namespace Practice5
             Debug.LogFormat("<color=green>Show()</color>");
 
             yield break;
+        }
+
+        private IEnumerator ShowWithCallback(LevelUpRewardItem levelUpRewardItem, Action callback)
+        {
+            Debug.LogFormat("<color=green>ShowWithCallback()</color>");
+
+            callback.Invoke();
+
+            yield return 1;
         }
     }
 }
