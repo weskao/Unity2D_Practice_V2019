@@ -63,17 +63,17 @@ namespace Practice2
 
         private void Update()
         {
-            if (_gameObject.activeInHierarchy)
-            {
-                if (IsAnimationPlayDone(Forward))
-                {
-                    Debug.Log($"Forward play done.");
-                }
-                else
-                {
-                    Debug.LogFormat("<color=green>Forward not play done.</color>");
-                }
-            }
+            // if (_gameObject.activeInHierarchy)
+            // {
+            //     if (IsAnimationPlayDone(Forward))
+            //     {
+            //         Debug.Log($"Forward play done.");
+            //     }
+            //     else
+            //     {
+            //         Debug.LogFormat("<color=green>Forward not play done.</color>");
+            //     }
+            // }
         }
 
         private bool IsAnimationPlayDone(int targetHash)
