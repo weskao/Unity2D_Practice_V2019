@@ -347,10 +347,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac3adb3f380469ebfade1e53014ae54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletContainer: {fileID: 778725508}
-  _bulletPrefab: {fileID: 6022959503231276916, guid: 6b3a7a5c768c6f047a1ceed75fdbf256,
+  _objectContainer: {fileID: 778725508}
+  _generatedObject: {fileID: 6022959503231276916, guid: 6b3a7a5c768c6f047a1ceed75fdbf256,
     type: 3}
-  _bulletPool: []
+  _basicAmountOfGeneratedObject: 2
+  _additionalAmountOfGeneratedObject: 8
 --- !u!114 &1508227707
 MonoBehaviour:
   m_ObjectHideFlags: 0
