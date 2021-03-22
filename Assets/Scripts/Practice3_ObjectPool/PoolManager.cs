@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Extensions;
+﻿using Extensions;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,15 +9,18 @@ namespace Practice3_ObjectPool
     public class PoolManager : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _bulletContainer;
+        private GameObject _objectContainer;
 
         [SerializeField]
-        private GameObject _bulletPrefab;
+        private GameObject _generatedObject;
 
         [SerializeField]
-        private List<GameObject> _bulletPool;
+        private int _basicAmountOfGeneratedObject = 2;
 
-        private int _amountOfBullets = 10;
+        [SerializeField]
+        private int _additionalAmountOfGeneratedObject = 8;
+
+        private List<GameObject> _objectPool;
 
         private static PoolManager _instance;
 
@@ -41,47 +44,49 @@ namespace Practice3_ObjectPool
 
         private void Start()
         {
-            _bulletPool = GenerateBullets(_amountOfBullets);
+            _objectPool = GenerateObject(_basicAmountOfGeneratedObject);
+            _objectPool.AddRange(GenerateObject(_additionalAmountOfGeneratedObject));
         }
 
-        public GameObject RequestBullet()
+        public GameObject RequestGeneratedObject()
         {
-            foreach (var bullet in _bulletPool)
+            foreach (var generatedObject in _objectPool)
             {
-                if (bullet.activeInHierarchy == false)
+                if (generatedObject.activeInHierarchy == false)
                 {
-                    bullet.Show();
-                    return bullet;
+                    generatedObject.Show();
+                    return generatedObject;
                 }
             }
 
-            return CreateBullet(_bulletPool.Count);
+            return GetNewObject(_objectPool.Count);
         }
 
-        private List<GameObject> GenerateBullets(int amountOfBullets)
+        private List<GameObject> GenerateObject(int amountOfGeneratedObject)
         {
-            for (var i = 0; i < amountOfBullets; i++)
-            {
-                var bullet = CreateBullet(i);
+            var generatedObjectList = new List<GameObject>();
 
-                bullet.Hide();
+            for (var i = 0; i < amountOfGeneratedObject; i++)
+            {
+                var generatedObject = GetNewObject(i);
+
+                generatedObject.Hide();
+                generatedObjectList.Add(generatedObject);
             }
 
-            return _bulletPool;
+            return generatedObjectList;
         }
 
-        private GameObject CreateBullet(int offsetY)
+        private GameObject GetNewObject(int offsetY)
         {
-            var bullet = Instantiate(_bulletPrefab);
-            var oldBulletPosition = bullet.transform.position;
-            var newPositionY = oldBulletPosition.y - bullet.GetComponent<Image>().sprite.rect.height * offsetY;
+            var generatedObject = Instantiate(_generatedObject);
+            var oldObjectPosition = generatedObject.transform.position;
+            var newPositionY = oldObjectPosition.y - generatedObject.GetComponent<Image>().sprite.rect.height * offsetY;
 
-            bullet.transform.position = new Vector2(oldBulletPosition.x, newPositionY);
-            bullet.transform.parent = _bulletContainer.transform;
+            generatedObject.transform.position = new Vector2(oldObjectPosition.x, newPositionY);
+            generatedObject.transform.parent = _objectContainer.transform;
 
-            _bulletPool.Add(bullet);
-
-            return bullet;
+            return generatedObject;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Practice2
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                var bullet = PoolManager.Instance.RequestBullet();
+                var bullet = PoolManager.Instance.RequestGeneratedObject();
 
                 // Communicate with the object pool system
                 // Request bullet
