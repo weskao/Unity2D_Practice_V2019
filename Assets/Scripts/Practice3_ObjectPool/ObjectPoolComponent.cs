@@ -17,7 +17,7 @@ namespace Practice3_ObjectPool
         private int _basicAmountOfGeneratedObject = 2;
 
         [SerializeField]
-        private int _additionalAmountOfGeneratedObject = 8;
+        private int _additionalAmountOfGeneratedObject = 3;
 
         private List<GameObject> _objectPool;
 
@@ -43,12 +43,13 @@ namespace Practice3_ObjectPool
 
         private void Start()
         {
-            _objectPool = GenerateObject(_basicAmountOfGeneratedObject);
-            _objectPool.AddRange(GenerateObject(_additionalAmountOfGeneratedObject));
+            _objectPool = GenerateObjectList(_basicAmountOfGeneratedObject);
+            _objectPool.AddRange(GenerateObjectList(_additionalAmountOfGeneratedObject));
         }
 
         public GameObject RequestGeneratedObject()
         {
+            Debug.LogFormat("<color=yellow>Wes - ObjectPoolComponent - RequestGeneratedObject()</color>");
             foreach (var generatedObject in _objectPool)
             {
                 if (generatedObject.activeInHierarchy == false)
@@ -61,11 +62,11 @@ namespace Practice3_ObjectPool
             return GetNewObject();
         }
 
-        private List<GameObject> GenerateObject(int amountOfGeneratedObject)
+        private List<GameObject> GenerateObjectList(int objectAmount)
         {
             var generatedObjectList = new List<GameObject>();
 
-            for (var i = 0; i < amountOfGeneratedObject; i++)
+            for (var i = 0; i < objectAmount; i++)
             {
                 var generatedObject = GetNewObject();
 
@@ -79,11 +80,11 @@ namespace Practice3_ObjectPool
         private GameObject GetNewObject()
         {
             var generatedObject = Instantiate(_generatedObject);
-            var oldObjectPosition = generatedObject.transform.position;
-            var newPositionY = oldObjectPosition.y - generatedObject.GetComponent<Image>().sprite.rect.height * offsetY;
-
-            generatedObject.transform.position = new Vector2(oldObjectPosition.x, newPositionY);
-            generatedObject.transform.parent = _objectContainer.transform;
+            // var oldObjectPosition = generatedObject.transform.position;
+            // var newPositionY = oldObjectPosition.y - generatedObject.GetComponent<Image>().sprite.rect.height * offsetY;
+            //
+            // generatedObject.transform.position = new Vector2(oldObjectPosition.x, newPositionY);
+            // generatedObject.transform.parent = _objectContainer.transform;
 
             return generatedObject;
         }
