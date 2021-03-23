@@ -1,4 +1,6 @@
-﻿using Practice3_ObjectPool;
+﻿using System;
+using Extensions;
+using Practice3_ObjectPool;
 using UnityEngine;
 
 namespace Practice2
@@ -8,17 +10,43 @@ namespace Practice2
         [SerializeField]
         private GameObject _bulletPrefab;
 
+        // [SerializeField]
+        // private ObjectPoolComponent<Bullet> _bulletPoolComponent;
+
         [SerializeField]
-        private ObjectPoolComponent<Bullet> _bulletPoolComponent;
+        private BulletPoolComponent _bulletPoolComponent;
 
         private void Update()
         {
+            // string s = KeyCode.Space.ToString();
+            // switch (Input.inputString)
+            // {
+            //     case "1":
+            //         break;
+            // }
+            // Event e = Event.current;
+            //
+            // if (Input.anyKeyDown && e != null && e.isKey)
+            // {
+            //     Debug.Log($"Wes - Player - down!");
+            //     switch (Event.current.keyCode)
+            //     {
+            //         case KeyCode.Space:
+            //             var bullet = _bulletPoolComponent.RequestGeneratedObject();
+            //             bullet.Show();
+            //
+            //             break;
+            //     }
+            // }
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 var bullet = _bulletPoolComponent.RequestGeneratedObject();
-
-                // Communicate with the object pool system
-                // Request bullet
+                bullet.Show();
+            }
+            else if (Input.GetKeyDown(KeyCode.R))
+            {
+                _bulletPoolComponent.Init();
             }
         }
     }
