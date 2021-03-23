@@ -21,15 +21,15 @@ namespace Practice3_ObjectPool
 
         private List<GameObject> _objectPool;
 
-        private static PoolManager _instance;
+        private static ObjectPoolComponent _instance;
 
-        public static PoolManager Instance
+        public static ObjectPoolComponent Instance
         {
             get
             {
                 if (_instance == null)
                 {
-                    Debug.LogError("The PoolManager is NULL");
+                    Debug.LogError("The ObjectPoolComponent is NULL");
                 }
 
                 return _instance;
