@@ -58,7 +58,7 @@ namespace Practice3_ObjectPool
                 }
             }
 
-            return GetNewObject(_objectPool.Count);
+            return GetNewObject();
         }
 
         private List<GameObject> GenerateObject(int amountOfGeneratedObject)
@@ -67,7 +67,7 @@ namespace Practice3_ObjectPool
 
             for (var i = 0; i < amountOfGeneratedObject; i++)
             {
-                var generatedObject = GetNewObject(i);
+                var generatedObject = GetNewObject();
 
                 generatedObject.Hide();
                 generatedObjectList.Add(generatedObject);
@@ -76,7 +76,7 @@ namespace Practice3_ObjectPool
             return generatedObjectList;
         }
 
-        private GameObject GetNewObject(int offsetY)
+        private GameObject GetNewObject()
         {
             var generatedObject = Instantiate(_generatedObject);
             var oldObjectPosition = generatedObject.transform.position;
