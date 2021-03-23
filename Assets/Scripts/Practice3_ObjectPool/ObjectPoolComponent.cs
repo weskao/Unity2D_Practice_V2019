@@ -1,17 +1,18 @@
 ﻿using Extensions;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Practice3_ObjectPool
 {
-    public class ObjectPoolComponent : MonoBehaviour
+    public class ObjectPoolComponent<T> : MonoBehaviour where T : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _objectContainer;
+        private T _objectContainer;
 
         [SerializeField]
-        private GameObject _generatedObject;
+        private T _generatedObject;
 
         [SerializeField]
         private int _basicAmountOfGeneratedObject = 2;
@@ -19,11 +20,13 @@ namespace Practice3_ObjectPool
         [SerializeField]
         private int _additionalAmountOfGeneratedObject = 3;
 
-        private List<GameObject> _objectPool;
+        private int _requestIndex = -1;
 
-        private static ObjectPoolComponent _instance;
+        private List<T> _objectPool;
 
-        public static ObjectPoolComponent Instance
+        private static ObjectPoolComponent<T> _instance;
+
+        public static ObjectPoolComponent<T> Instance
         {
             get
             {
@@ -48,29 +51,27 @@ namespace Practice3_ObjectPool
             Debug.Log($"Wes - Start() - _objectPool.Count = {_objectPool.Count}");
         }
 
-        public GameObject RequestGeneratedObject()
+        public T RequestGeneratedObject()
         {
             Debug.LogFormat("<color=yellow>Wes - ObjectPoolComponent - RequestGeneratedObject()</color>");
-            foreach (var generatedObject in _objectPool)
+
+            _requestIndex++;
+
+            if (_requestIndex >= _objectPool.Count)
             {
-                if (generatedObject.activeInHierarchy == false)
-                {
-                    generatedObject.Show();
-                    return generatedObject;
-                }
+                _objectPool.Add(GetNewObject());
             }
 
-            var generatedNewObject = GetNewObject();
-            _objectPool.Add(generatedNewObject);
+            Debug.Log($"Wes - _requestCount = {_requestIndex}, _objectPool.Count = {_objectPool.Count}");
 
             Debug.Log($"Wes - RequestGeneratedObject() - _objectPool.Count = {_objectPool.Count}");
 
-            return generatedNewObject;
+            return _objectPool[_requestIndex];
         }
 
-        private List<GameObject> GenerateObjectList(int objectAmount)
+        private List<T> GenerateObjectList(int objectAmount)
         {
-            var generatedObjectList = new List<GameObject>();
+            var generatedObjectList = new List<T>();
 
             for (var i = 0; i < objectAmount; i++)
             {
@@ -83,7 +84,7 @@ namespace Practice3_ObjectPool
             return generatedObjectList;
         }
 
-        private GameObject GetNewObject()
+        private T GetNewObject()
         {
             var generatedObject = Instantiate(_generatedObject, _objectContainer.transform, true);
             // var oldObjectPosition = generatedObject.transform.position;
