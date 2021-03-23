@@ -215,6 +215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 778725509}
+  - component: {fileID: 778725510}
   m_Layer: 0
   m_Name: Bullet_Container
   m_TagString: Untagged
@@ -236,6 +237,22 @@ Transform:
   m_Father: {fileID: 1508227705}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &778725510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778725508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61dab9be598545d785d23f83c639f64b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _generatedObject: {fileID: 6022959503231276906, guid: 6b3a7a5c768c6f047a1ceed75fdbf256,
+    type: 3}
+  _basicAmountOfGeneratedObject: 2
+  _additionalAmountOfGeneratedObject: 3
 --- !u!1 &1299421983
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +328,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1508227705}
-  - component: {fileID: 1508227706}
   - component: {fileID: 1508227707}
   m_Layer: 0
   m_Name: Pool_Manager
@@ -335,23 +351,6 @@ Transform:
   m_Father: {fileID: 2072681244}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1508227706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1508227704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ac3adb3f380469ebfade1e53014ae54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectContainer: {fileID: 778725508}
-  _generatedObject: {fileID: 6022959503231276916, guid: 6b3a7a5c768c6f047a1ceed75fdbf256,
-    type: 3}
-  _basicAmountOfGeneratedObject: 2
-  _additionalAmountOfGeneratedObject: 8
 --- !u!114 &1508227707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,6 +435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 6022959503231276916, guid: 6b3a7a5c768c6f047a1ceed75fdbf256,
     type: 3}
+  _bulletPoolComponent: {fileID: 778725510}
 --- !u!1 &2072681243
 GameObject:
   m_ObjectHideFlags: 0
