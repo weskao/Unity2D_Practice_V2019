@@ -5,10 +5,10 @@ namespace Practice3_ObjectPool
 {
     public class Bullet : MonoBehaviour
     {
-        private void OnEnable()
-        {
-            Invoke(nameof(Hide), 0);
-        }
+        // private void OnEnable()
+        // {
+        //     Invoke(nameof(Hide), 0);
+        // }
 
         private void Hide()
         {
@@ -18,11 +18,6 @@ namespace Practice3_ObjectPool
         private void Start()
         {
             Debug.Log("Bullet Created!");
-        }
-
-        private void Update()
-        {
-            Invoke(nameof(Hide), 0);
         }
     }
 }

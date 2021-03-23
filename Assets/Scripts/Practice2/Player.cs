@@ -8,11 +8,14 @@ namespace Practice2
         [SerializeField]
         private GameObject _bulletPrefab;
 
+        [SerializeField]
+        private ObjectPoolComponent _objectPoolComponent;
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                var bullet = PoolManager.Instance.RequestGeneratedObject();
+                var bullet = _objectPoolComponent.RequestGeneratedObject();
 
                 // Communicate with the object pool system
                 // Request bullet

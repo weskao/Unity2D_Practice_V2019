@@ -44,7 +44,8 @@ namespace Practice3_ObjectPool
         private void Start()
         {
             _objectPool = GenerateObjectList(_basicAmountOfGeneratedObject);
-            _objectPool.AddRange(GenerateObjectList(_additionalAmountOfGeneratedObject));
+            // _objectPool.AddRange(GenerateObjectList(_additionalAmountOfGeneratedObject));
+            Debug.Log($"Wes - Start() - _objectPool.Count = {_objectPool.Count}");
         }
 
         public GameObject RequestGeneratedObject()
@@ -59,7 +60,12 @@ namespace Practice3_ObjectPool
                 }
             }
 
-            return GetNewObject();
+            var generatedNewObject = GetNewObject();
+            _objectPool.Add(generatedNewObject);
+
+            Debug.Log($"Wes - RequestGeneratedObject() - _objectPool.Count = {_objectPool.Count}");
+
+            return generatedNewObject;
         }
 
         private List<GameObject> GenerateObjectList(int objectAmount)
@@ -79,12 +85,11 @@ namespace Practice3_ObjectPool
 
         private GameObject GetNewObject()
         {
-            var generatedObject = Instantiate(_generatedObject);
+            var generatedObject = Instantiate(_generatedObject, _objectContainer.transform, true);
             // var oldObjectPosition = generatedObject.transform.position;
             // var newPositionY = oldObjectPosition.y - generatedObject.GetComponent<Image>().sprite.rect.height * offsetY;
             //
             // generatedObject.transform.position = new Vector2(oldObjectPosition.x, newPositionY);
-            // generatedObject.transform.parent = _objectContainer.transform;
 
             return generatedObject;
         }
