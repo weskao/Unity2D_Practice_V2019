@@ -1,5 +1,4 @@
-﻿using Extensions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Practice3_ObjectPool
@@ -12,47 +11,20 @@ namespace Practice3_ObjectPool
         [SerializeField]
         private int _basicAmountOfGeneratedObject = 0;
 
-        [SerializeField]
-        private int _additionalAmountOfGeneratedObject = 3;
+        // [SerializeField]
+        // private int _additionalAmountOfGeneratedObject = 3;
 
-        private int _requestIndex = -1;
+        public int RequestIndex { get; private set; } = -1;
 
         private List<T> _objectPool;
-
-        // private static ObjectPoolComponent<T> _instance;
-        //
-        // public static ObjectPoolComponent<T> Instance
-        // {
-        //     get
-        //     {
-        //         if (_instance == null)
-        //         {
-        //             Debug.LogError("The ObjectPoolComponent is NULL");
-        //         }
-        //
-        //         return _instance;
-        //     }
-        // }
-
-        // private void Awake()
-        // {
-        //     // _instance = this;
-        // }
-
-        private void Start()
-        {
-            // Init();
-            // _objectPool.AddRange(GenerateObjectList(_additionalAmountOfGeneratedObject));
-            Debug.Log($"Wes - Start() - _objectPool.Count = {_objectPool.Count}");
-        }
 
         public T RequestGeneratedObject()
         {
             Debug.LogFormat("<color=yellow>Wes - ObjectPoolComponent - RequestGeneratedObject()</color>");
 
-            _requestIndex++;
+            RequestIndex++;
 
-            if (_requestIndex + 1 > _objectPool.Count)
+            if (RequestIndex + 1 > _objectPool.Count)
             {
                 _objectPool.Add(GetNewObject());
             }
@@ -68,11 +40,9 @@ namespace Practice3_ObjectPool
             //     }
             // }
 
-            Debug.Log($"Wes - _requestIndex = {_requestIndex}, _objectPool.Count = {_objectPool.Count}");
+            Debug.Log($"Wes - ObjectPoolComponent - RequestGeneratedObject() - _objectPool.Count = {_objectPool.Count}");
 
-            Debug.Log($"Wes - RequestGeneratedObject() - _objectPool.Count = {_objectPool.Count}");
-
-            return _objectPool[_requestIndex];
+            return _objectPool[RequestIndex];
         }
 
         public void OnEnable()
@@ -82,14 +52,22 @@ namespace Practice3_ObjectPool
 
         public void OnDisable()
         {
-            _objectPool = null;
             HideAllObjectsInPool();
+            // _objectPool = null;
         }
+
+        // private void OnDestroy()
+        // {
+        //     _objectPool = null;
+        // }
 
         public void Init()
         {
             Debug.LogFormat("<color=yellow>Wes - ObjectPoolComponent - Init()</color>");
-            _requestIndex = -1;
+            RequestIndex = -1;
+
+            // _objectPool = GetComponentsInChildren<T>().ToList()
+
             if (_objectPool != null)
             {
                 HideAllObjectsInPool();
@@ -116,7 +94,7 @@ namespace Practice3_ObjectPool
             {
                 var generatedObject = GetNewObject();
 
-                generatedObject.Hide();
+                generatedObject.gameObject.SetActive(false);
                 generatedObjectList.Add(generatedObject);
             }
 
