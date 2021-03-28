@@ -23,8 +23,11 @@ namespace Practice2
 
     public class ObjectMoving : MonoBehaviour
     {
+        private static readonly int IsForwardPlayedDone = Animator.StringToHash("IsForwardPlayedDone");
         private static readonly int Forward = Animator.StringToHash("Forward");
         private static readonly int Backward = Animator.StringToHash("Backward");
+
+        private static bool _isForward = true;
 
         [SerializeField]
         private AnimatorStateMachine _originalAnimatorStateMachine;
@@ -38,7 +41,8 @@ namespace Practice2
         [SerializeField]
         private GameObject _gameObject;
 
-        private static bool _isForward = true;
+        [SerializeField]
+        private Button _buttonAnimationTrigger;
 
         [SerializeField]
         private Animator _animator;
@@ -59,18 +63,23 @@ namespace Practice2
             }
 
             Debug.Log($"Wes - Forward = {Forward}");
+            AnimationManager.Instance.InitAnimationSettings(_animator);
+            _buttonAnimationTrigger.onClick.AddListener(AnimationTriggerButtonClick);
         }
 
         public void MoveSquare()
         {
             transformPosition = _gameObject.transform.position;
+            // _animator.SetTrigger(_isForward ? Forward : Backward);
 
-            _animator.SetTrigger(_isForward ? Forward : Backward);
-            _isForward = !_isForward;
+            // _isForward = !_isForward;
+
+            _animator.SetTrigger(Forward);
         }
 
         private void Update()
         {
+            AnimationManager.Instance.CheckAnimationCompleted(Forward, OnAnimationComplete);
             // if (_gameObject.activeInHierarchy)
             // {
             //     if (IsAnimationPlayDone(Forward))
@@ -84,11 +93,19 @@ namespace Practice2
             // }
         }
 
+        private void AnimationTriggerButtonClick()
+        {
+            // Debug.LogFormat("<color=yellow>ObjectMoving - AnimationTriggerButtonClick()</color>");
+            // MoveSquare();
+            // AnimationManager.Instance.InitAnimationSettings(_animator);
+        }
+
         private void OnAnimationComplete()
         {
             Debug.LogFormat("<color=yellow>OnAnimationComplete()</color>");
 
-            _animator.SetTrigger(Backward);
+            // _animator.SetTrigger(Backward);
+            _animator.SetBool(IsForwardPlayedDone, true);
         }
     }
 }

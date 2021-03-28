@@ -7,8 +7,6 @@ namespace ThirdParty.AnimationControl
     {
         private Animator _animator;
 
-        private bool _isAnimationEverPlayed = false;
-
         private static AnimationManager _animationManager;
 
         public static AnimationManager Instance
@@ -31,8 +29,8 @@ namespace ThirdParty.AnimationControl
 
         public void InitAnimationSettings(Animator animator)
         {
+            Debug.LogFormat("<color=yellow>AnimationManager - InitAnimationSettings()</color>");
             _animator = animator;
-            _isAnimationEverPlayed = false;
         }
 
         public void CheckAnimationCompleted(int animationHash, Action onComplete)
@@ -43,11 +41,11 @@ namespace ThirdParty.AnimationControl
                 return;
             }
 
-            if (IsAnimationPlayedDone(animationHash) && !_isAnimationEverPlayed)
+            if (IsAnimationPlayedDone(animationHash))
             {
-                _isAnimationEverPlayed = true;
+                // _isAnimationPlayedDoneFlag = true;
                 onComplete?.Invoke();
-                Debug.LogFormat("<color=yellow>Wes - AnimationManager - Animation played done!</color>");
+                Debug.LogFormat("<color=yellow>AnimationManager - Animation played done!</color>");
             }
         }
 
@@ -56,28 +54,18 @@ namespace ThirdParty.AnimationControl
             var animatorInfo = _animator.GetCurrentAnimatorStateInfo(0);
             if (animatorInfo.shortNameHash == animationHash)
             {
-                Debug.Log($"Wes - shortNameHash = {_animator.GetCurrentAnimatorStateInfo(0).shortNameHash}");
+                Debug.Log($"shortNameHash = {_animator.GetCurrentAnimatorStateInfo(0).shortNameHash}");
                 Debug.LogFormat($"<color=Blue>animatorInfo.normalizedTime = {animatorInfo.normalizedTime}</color>");
 
-                if (animatorInfo.normalizedTime % 1 < 0.99f)
+                if (animatorInfo.normalizedTime < 1)
                 {
                     return false;
                 }
                 else
                 {
                     Debug.LogFormat($"<color=Blue>★animatorInfo.normalizedTime = {animatorInfo.normalizedTime}</color>");
-                    Debug.LogFormat("<color=yellow>Wes - AnimationManager - PlayDone!!!</color>");
-                }
-
-                if (animatorInfo.normalizedTime >= 1)
-                {
-                    Debug.Log($"{animationHash} play done.");
+                    Debug.Log($"AnimationManager - {animationHash} play done.");
                     return true;
-                }
-                else
-                {
-                    // Debug.Log($"{animationHash} not play done.");
-                    return false;
                 }
             }
 
