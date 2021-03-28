@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 713310076313445216}
   - component: {fileID: 7539161215867915520}
   m_Layer: 5
-  m_Name: Square_WithExitBehaviourVariant
+  m_Name: Square_Black_WithExitBehaviourVariant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
