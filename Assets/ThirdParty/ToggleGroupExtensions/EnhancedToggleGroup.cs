@@ -20,12 +20,10 @@ namespace ThirdParty.ToggleGroupExtensions
 
         private void InitToggles()
         {
-            Debug.LogFormat("<color=yellow>es - EnhancedToggleGroup - InitToggles()</color>");
             foreach (var toggle in _toggles)
             {
                 toggle.group = _toggleGroup;
                 toggle.onValueChanged.AddListener(OnToggleValueChange);
-                Debug.Log($"toggle.name = {toggle.name}");
             }
         }
 
@@ -34,7 +32,7 @@ namespace ThirdParty.ToggleGroupExtensions
             if (isOn)
             {
                 var activeToggle = _toggleGroup.ActiveToggles().First();
-                Debug.Log($"OnToggleValueChange() - activeToggle.name = {activeToggle.name}");
+                Debug.Log($"OnToggleValueChange() - current activeToggle.name = {activeToggle.name}");
             }
         }
     }
