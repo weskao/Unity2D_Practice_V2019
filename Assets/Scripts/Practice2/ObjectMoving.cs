@@ -1,11 +1,13 @@
 ﻿using System;
+using ThirdParty.AnimationControl;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Practice2
 {
     [Serializable]
-    public class Profile
+    public class Profile : ScriptableObject
     {
         public Image[] images;
         public Text text;
@@ -24,7 +26,11 @@ namespace Practice2
         private static readonly int Forward = Animator.StringToHash("Forward");
         private static readonly int Backward = Animator.StringToHash("Backward");
 
-        public Profile profile;
+        [SerializeField]
+        private AnimatorStateMachine _originalAnimatorStateMachine;
+
+        [SerializeField]
+        private Profile _profile;
 
         [SerializeField]
         private GroupA _groupA;
@@ -51,6 +57,8 @@ namespace Practice2
             {
                 Debug.Log($"number = {_myGroup.number}");
             }
+
+            Debug.Log($"Wes - Forward = {Forward}");
         }
 
         public void MoveSquare()
@@ -76,26 +84,11 @@ namespace Practice2
             // }
         }
 
-        private bool IsAnimationPlayDone(int targetHash)
+        private void OnAnimationComplete()
         {
-            var animatorInfo = _animator.GetCurrentAnimatorStateInfo(0);
-            if (animatorInfo.shortNameHash == targetHash)
-            {
-                Debug.LogFormat($"<color=Blue>animatorInfo.normalizedTime = {animatorInfo.normalizedTime}</color>");
+            Debug.LogFormat("<color=yellow>OnAnimationComplete()</color>");
 
-                if (animatorInfo.normalizedTime >= 1.0f)
-                {
-                    // Debug.Log($"{targetHash} play done.");
-                    return true;
-                }
-                else
-                {
-                    // Debug.Log($"{targetHash} not play done.");
-                    return false;
-                }
-            }
-
-            return false;
+            _animator.SetTrigger(Backward);
         }
     }
 }

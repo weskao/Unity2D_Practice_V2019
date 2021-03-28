@@ -1290,10 +1290,7 @@ MonoBehaviour:
   - {fileID: 394421220}
   transform: {fileID: 0}
   number: 3
-  _profile:
-    images: []
-    text: {fileID: 939872082}
-    id: 99
+  _profile: {fileID: 0}
 --- !u!114 &838045728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1842,7 +1839,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -144.13, y: 35.3}
+  m_AnchoredPosition: {x: -144, y: 35}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.7132401, y: 1}
 --- !u!114 &1045779219
@@ -2267,10 +2264,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f4a924344945fba4f1debc2aec959c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile:
-    images: []
-    text: {fileID: 0}
-    id: 0
+  _originalAnimatorStateMachine: {fileID: 0}
+  _profile: {fileID: 0}
+  _animationStatusMachine: {fileID: 0}
   _groupA: {fileID: 0}
   _gameObject: {fileID: 1045779217}
   _animator: {fileID: 1045779224}
