@@ -8,7 +8,7 @@ namespace ThirdParty.AnimationControl
         private Animator _animator;
 
         private static AnimationManager _animationManager;
-        private AnimatorStateInfo _animatorInfo;
+        private bool _isAnimationPlayedDone = false; // 即時判斷動畫是否執行完畢, 避免 onComplete 短時間內被重複呼叫
 
         public static AnimationManager Instance
         {
@@ -32,7 +32,6 @@ namespace ThirdParty.AnimationControl
         {
             Debug.LogFormat("<color=yellow>AnimationManager - InitAnimationSettings()</color>");
             _animator = animator;
-            _animatorInfo = _animator.GetCurrentAnimatorStateInfo(0);
         }
 
         public void CheckAnimationCompleted(int animationHash, Action onComplete)
@@ -40,6 +39,11 @@ namespace ThirdParty.AnimationControl
             if (_animator == null)
             {
                 Debug.LogWarning("AnimationManager - _animator is null");
+                return;
+            }
+
+            if (_isAnimationPlayedDone)
+            {
                 return;
             }
 
@@ -52,13 +56,13 @@ namespace ThirdParty.AnimationControl
 
         private bool IsAnimationPlayedDone(int animationHash)
         {
-            if (_animatorInfo.shortNameHash == animationHash)
-            {
-                Debug.LogFormat($"<color=Blue>animatorInfo.normalizedTime = {_animatorInfo.normalizedTime}</color>");
-            }
+            var animatorInfo = _animator.GetCurrentAnimatorStateInfo(0);
 
-            if (_animatorInfo.shortNameHash == animationHash && _animatorInfo.normalizedTime >= 1)
+            if (animatorInfo.shortNameHash == animationHash && animatorInfo.normalizedTime >= 1)
             {
+                _isAnimationPlayedDone = true;
+                Debug.LogFormat($"<color=Blue>animatorInfo.normalizedTime = {animatorInfo.normalizedTime}</color>");
+
                 // Debug.Log($"shortNameHash = {_animator.GetCurrentAnimatorStateInfo(0).shortNameHash}");
 
                 // if (_animatorInfo.normalizedTime < 1)
