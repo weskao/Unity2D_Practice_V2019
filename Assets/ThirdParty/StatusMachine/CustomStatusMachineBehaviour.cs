@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ThirdParty.StatusMachine
 {
-    public class CustomStatusMachineBehaviour : MonoBehaviour
+    public abstract class CustomStatusMachineBehaviour : MonoBehaviour
     {
         public Action onStateEnter;
         public Action onStateUpdate;
