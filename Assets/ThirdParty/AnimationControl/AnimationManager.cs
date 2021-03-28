@@ -8,6 +8,7 @@ namespace ThirdParty.AnimationControl
         private Animator _animator;
 
         private static AnimationManager _animationManager;
+        private AnimatorStateInfo _animatorInfo;
 
         public static AnimationManager Instance
         {
@@ -31,6 +32,7 @@ namespace ThirdParty.AnimationControl
         {
             Debug.LogFormat("<color=yellow>AnimationManager - InitAnimationSettings()</color>");
             _animator = animator;
+            _animatorInfo = _animator.GetCurrentAnimatorStateInfo(0);
         }
 
         public void CheckAnimationCompleted(int animationHash, Action onComplete)
@@ -43,7 +45,6 @@ namespace ThirdParty.AnimationControl
 
             if (IsAnimationPlayedDone(animationHash))
             {
-                // _isAnimationPlayedDoneFlag = true;
                 onComplete?.Invoke();
                 Debug.LogFormat("<color=yellow>AnimationManager - Animation played done!</color>");
             }
@@ -51,22 +52,25 @@ namespace ThirdParty.AnimationControl
 
         private bool IsAnimationPlayedDone(int animationHash)
         {
-            var animatorInfo = _animator.GetCurrentAnimatorStateInfo(0);
-            if (animatorInfo.shortNameHash == animationHash)
+            if (_animatorInfo.shortNameHash == animationHash)
             {
-                Debug.Log($"shortNameHash = {_animator.GetCurrentAnimatorStateInfo(0).shortNameHash}");
-                Debug.LogFormat($"<color=Blue>animatorInfo.normalizedTime = {animatorInfo.normalizedTime}</color>");
+                Debug.LogFormat($"<color=Blue>animatorInfo.normalizedTime = {_animatorInfo.normalizedTime}</color>");
+            }
 
-                if (animatorInfo.normalizedTime < 1)
-                {
-                    return false;
-                }
-                else
-                {
-                    Debug.LogFormat($"<color=Blue>★animatorInfo.normalizedTime = {animatorInfo.normalizedTime}</color>");
-                    Debug.Log($"AnimationManager - {animationHash} play done.");
-                    return true;
-                }
+            if (_animatorInfo.shortNameHash == animationHash && _animatorInfo.normalizedTime >= 1)
+            {
+                // Debug.Log($"shortNameHash = {_animator.GetCurrentAnimatorStateInfo(0).shortNameHash}");
+
+                // if (_animatorInfo.normalizedTime < 1)
+                // {
+                //     return false;
+                // }
+                // else
+                // {
+                // Debug.LogFormat($"<color=Blue>★animatorInfo.normalizedTime = {_animatorInfo.normalizedTime}</color>");
+                // Debug.Log($"AnimationManager - {animationHash} play done.");
+                return true;
+                // }
             }
 
             return false;

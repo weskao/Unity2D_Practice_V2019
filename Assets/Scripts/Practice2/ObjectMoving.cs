@@ -95,9 +95,9 @@ namespace Practice2
 
         private void AnimationTriggerButtonClick()
         {
-            // Debug.LogFormat("<color=yellow>ObjectMoving - AnimationTriggerButtonClick()</color>");
-            // MoveSquare();
-            // AnimationManager.Instance.InitAnimationSettings(_animator);
+            Debug.LogFormat("<color=yellow>ObjectMoving - AnimationTriggerButtonClick()</color>");
+            MoveSquare();
+            AnimationManager.Instance.InitAnimationSettings(_animator);
         }
 
         private void OnAnimationComplete()
