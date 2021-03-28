@@ -34,6 +34,7 @@ namespace ThirdParty.AnimationControl
             _animator = animator;
         }
 
+        // TODO: Fix bug - 會有延遲的情形, 沒辦法即時執行 onComplete 事件
         public void CheckAnimationCompleted(int animationHash, Action onComplete)
         {
             if (_animator == null)
