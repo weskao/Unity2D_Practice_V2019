@@ -29,9 +29,9 @@ public class UITextSlide : MonoBehaviour
     private void OnEnable()
     {
         _currentState = State.Init;
-        // var pos = _rectTransform.anchoredPosition;
-        // pos.x = 0;
-        // _rectTransform.anchoredPosition = pos;
+        var pos = _rectTransform.anchoredPosition;
+        pos.x = 0;
+        _rectTransform.anchoredPosition = pos;
         Invoke(nameof(CheckState), _delayToStart);
     }
 
