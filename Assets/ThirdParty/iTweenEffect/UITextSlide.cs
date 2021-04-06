@@ -68,7 +68,7 @@ public class UITextSlide : MonoBehaviour
                                         "speed", _speed,
                                         "easetype", iTween.EaseType.linear,
                                         "islocal", true,
-                                        "oncomplete", "CheckState"));
+                                        "oncomplete", nameof(CheckState)));
     }
 
     private void CheckState()
