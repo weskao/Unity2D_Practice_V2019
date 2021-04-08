@@ -24,8 +24,8 @@ namespace Practice2
                 _testRetryRoutine = TestRetry();
                 StartCoroutine(_testRetryRoutine);
 
-                Debug.LogFormat("<color=yellow>Start TestRetry()</color>");
-                Debug.LogFormat("<color=yellow>TestRetryComponent - Start TestRetry()</color>");
+                Debug.LogFormat("<color=orange>Start TestRetry()</color>");
+                Debug.LogFormat("<color=orange>TestRetryComponent - Start TestRetry()</color>");
             }
         }
 
@@ -34,7 +34,7 @@ namespace Practice2
             // _isEndRetry = true;
             if (_testRetryRoutine != null)
             {
-                Debug.LogFormat("<color=yellow>TestRetryComponent - BreakRetry</color>");
+                Debug.LogFormat("<color=orange>TestRetryComponent - BreakRetry</color>");
                 StopCoroutine(_testRetryRoutine);
             }
         }
@@ -53,7 +53,7 @@ namespace Practice2
                 yield return new WaitForSeconds(3);
             }
 
-            Debug.LogFormat("<color=yellow>TestRetryComponent - TestRetry Done!</color>");
+            Debug.LogFormat("<color=orange>TestRetryComponent - TestRetry Done!</color>");
         }
     }
 }
