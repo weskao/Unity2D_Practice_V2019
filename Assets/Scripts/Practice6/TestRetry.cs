@@ -93,6 +93,12 @@ namespace Practice6
 
         private void StopRetry()
         {
+            if (_retryConfirmAdReward == null)
+            {
+                Debug.LogWarning($"No any retry coroutine is executing now.");
+                return;
+            }
+
             Debug.LogFormat("<color=green>TestRetry - StopRetry()</color>");
             StopCoroutine(_retryConfirmAdReward);
             Init();
