@@ -80,10 +80,10 @@ namespace Practice3_ObjectPool
         private GameObject GetNewObject(int offsetY)
         {
             var generatedObject = Instantiate(_generatedObject);
-            var oldObjectPosition = generatedObject.transform.position;
+            var oldObjectPosition = generatedObject.transform.localPosition;
             var newPositionY = oldObjectPosition.y - generatedObject.GetComponent<Image>().sprite.rect.height * offsetY;
 
-            generatedObject.transform.position = new Vector2(oldObjectPosition.x, newPositionY);
+            generatedObject.transform.localPosition = new Vector2(oldObjectPosition.x, newPositionY);
             generatedObject.transform.parent = _objectContainer.transform;
 
             return generatedObject;
