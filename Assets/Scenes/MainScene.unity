@@ -1249,7 +1249,7 @@ GameObject:
   - component: {fileID: 838045727}
   - component: {fileID: 838045730}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: TextSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4053,6 +4053,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Square_Black_WithExitBehaviourVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 713310076313445222, guid: e3ba6c281a3d19e4297800c138690f5c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3ba6c281a3d19e4297800c138690f5c, type: 3}
