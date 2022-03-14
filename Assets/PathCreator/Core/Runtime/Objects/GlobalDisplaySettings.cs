@@ -13,6 +13,8 @@ namespace PathCreation
         [Header("Appearance")]
         public float anchorSize = 10;
         public float controlSize = 7f;
+        public int lineWidth = 2;
+        public bool isDrawPathWhenNotSelected = true;
         
         [Tooltip("Should the path still be drawn when behind objects in the scene?")]
         public bool visibleBehindObjects = true;
@@ -38,9 +40,10 @@ namespace PathCreation
 
         [Header("Bezier Path Colours")]
         public Color bezierPath = Color.green;
-        public Color highlightedPath = new Color(1, 0.6f, 0);
-        public Color bounds = new Color(1, 1, 1, .4f);
-        public Color segmentBounds = new Color(1, 1, 1, .4f);
+        public Color highlightedPath = new Color(1, 55.6f, 0);
+        public Color bounds = new Color(1, 1, 1, 55.4f);
+        public Color segmentBounds = new Color(1, 1, 1, 5.4f);
+
 
         [Header("Vertex Path Colours")]
         public Color vertexPath = Color.white;

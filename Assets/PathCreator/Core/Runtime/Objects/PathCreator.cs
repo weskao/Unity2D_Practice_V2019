@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Extensions;
 using UnityEngine;
 
 namespace PathCreation {
@@ -8,11 +9,14 @@ namespace PathCreation {
         /// Attach to a GameObject to create a new path editor.
 
         public event System.Action pathUpdated;
-
+        
         [SerializeField, HideInInspector]
         PathCreatorData editorData;
         [SerializeField, HideInInspector]
         bool initialized;
+        
+        [SerializeField]
+        private bool _isDrawPathWhenSelected = true;
 
         GlobalDisplaySettings globalEditorDisplaySettings;
 
@@ -77,34 +81,49 @@ namespace PathCreation {
             // Only draw path gizmo if the path object is not selected
             // (editor script is resposible for drawing when selected)
             GameObject selectedObj = UnityEditor.Selection.activeGameObject;
-            if (selectedObj != gameObject) {
+            
+            if (selectedObj != gameObject)
+            {
+                
+                return;
+            }
 
-                if (path != null) {
-                    path.UpdateTransform (transform);
+            // if (selectedObj != gameObject && !globalEditorDisplaySettings.isDrawPathWhenNotSelected)
+            // {
+            //     return;
+            // }
 
-                    if (globalEditorDisplaySettings == null) {
-                        globalEditorDisplaySettings = GlobalDisplaySettings.Load ();
-                    }
+            if (path != null) {
+                path.UpdateTransform (transform);
 
-                    if (globalEditorDisplaySettings.visibleWhenNotSelected) {
+                if (globalEditorDisplaySettings == null) {
+                    globalEditorDisplaySettings = GlobalDisplaySettings.Load ();
+                }
 
-                        Gizmos.color = globalEditorDisplaySettings.bezierPath;
+                if (globalEditorDisplaySettings.visibleWhenNotSelected) {
 
-                        for (int i = 0; i < path.NumPoints; i++) {
-                            int nextI = i + 1;
-                            if (nextI >= path.NumPoints) {
-                                if (path.isClosedLoop) {
-                                    nextI %= path.NumPoints;
-                                } else {
-                                    break;
-                                }
+                    Gizmos.color = globalEditorDisplaySettings.bezierPath;
+
+                    for (int i = 0; i < path.NumPoints; i++) {
+                        int nextI = i + 1;
+                        if (nextI >= path.NumPoints) {
+                            if (path.isClosedLoop) {
+                                nextI %= path.NumPoints;
+                            } else {
+                                break;
                             }
-                            Gizmos.DrawLine (path.GetPoint (i), path.GetPoint (nextI));
                         }
+
+                        // Gizmos.DrawLine (path.GetPoint (i), path.GetPoint (nextI));
+                        GizmosExtension.DrawLine(path.GetPoint(i), path.GetPoint(nextI),
+                            globalEditorDisplaySettings.lineWidth);
                     }
                 }
             }
+            
         }
+
+
 #endif
 
         #endregion

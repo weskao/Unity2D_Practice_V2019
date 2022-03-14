@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anchorSize: 10
   controlSize: 7
+  lineWidth: 3
+  isDrawPathWhenNotSelected: 1
   visibleBehindObjects: 1
   visibleWhenNotSelected: 1
   hideAutoControls: 1

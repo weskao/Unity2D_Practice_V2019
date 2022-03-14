@@ -13,7 +13,7 @@ namespace PathCreation.Examples
 
         [SerializeField]
         private bool _isAllowRotation;
-        
+
         void Start() {
             if (pathCreator != null)
             {
@@ -28,7 +28,7 @@ namespace PathCreation.Examples
             {
                 distanceTravelled += speed * Time.deltaTime;
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-                
+
                 if(_isAllowRotation)
                 {
                     transform.rotation =
