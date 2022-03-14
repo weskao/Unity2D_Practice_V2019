@@ -10,6 +10,9 @@ namespace PathCreation.Examples
         public EndOfPathInstruction endOfPathInstruction;
         public float speed = 5;
         float distanceTravelled;
+
+        [SerializeField]
+        private bool _isAllowRotation;
         
         void Start() {
             if (pathCreator != null)
@@ -25,7 +28,12 @@ namespace PathCreation.Examples
             {
                 distanceTravelled += speed * Time.deltaTime;
                 transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-                transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+                
+                if(_isAllowRotation)
+                {
+                    transform.rotation =
+                        pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+                }
             }
         }
 
