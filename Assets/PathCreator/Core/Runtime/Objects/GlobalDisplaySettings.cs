@@ -7,15 +7,15 @@ namespace PathCreation
     //[CreateAssetMenu()]
     public class GlobalDisplaySettings : ScriptableObject
     {
-
         public enum HandleType { Sphere, Circle, Square };
 
         [Header("Appearance")]
         public float anchorSize = 10;
         public float controlSize = 7f;
-        public int lineWidth = 2;
-        public bool isDrawPathWhenNotSelected = true;
-        
+
+        [Range(1, 200)]
+        public uint lineWidth = 3;
+
         [Tooltip("Should the path still be drawn when behind objects in the scene?")]
         public bool visibleBehindObjects = true;
         [Tooltip("Should the path be drawn even when the path object is not selected?")]
@@ -40,21 +40,21 @@ namespace PathCreation
 
         [Header("Bezier Path Colours")]
         public Color bezierPath = Color.green;
-        public Color highlightedPath = new Color(1, 55.6f, 0);
-        public Color bounds = new Color(1, 1, 1, 55.4f);
-        public Color segmentBounds = new Color(1, 1, 1, 5.4f);
-
+        public Color highlightedPath = new Color(1, 0.6f, 0);
+        public Color bounds = new Color(1, 1, 1, .4f);
+        public Color segmentBounds = new Color(1, 1, 1, .4f);
 
         [Header("Vertex Path Colours")]
         public Color vertexPath = Color.white;
 
         [Header("Normals")]
         public Color normals = Color.yellow;
-        [Range(0,1)]
+        [Range(0, 1)]
         public float normalsLength = .1f;
 
 #if UNITY_EDITOR
-        public static GlobalDisplaySettings Load() {
+        public static GlobalDisplaySettings Load()
+        {
             string[] guids = UnityEditor.AssetDatabase.FindAssets("t:GlobalDisplaySettings");
             if (guids.Length == 0)
             {

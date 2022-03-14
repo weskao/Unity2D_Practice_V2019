@@ -1,7 +1,7 @@
 ﻿#if UNITY_EDITOR
 using UnityEngine;
 
-namespace Extensions
+namespace ThirdParty.Extensions
 {
     public static class GizmosExtension
     {
