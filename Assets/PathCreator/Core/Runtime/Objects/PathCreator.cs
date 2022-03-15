@@ -16,9 +16,6 @@ namespace PathCreation
         [SerializeField, HideInInspector]
         bool initialized;
 
-        [SerializeField]
-        private bool _isDrawPathWhenSelected = true;
-
         GlobalDisplaySettings globalEditorDisplaySettings;
 
         [SerializeField]
