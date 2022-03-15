@@ -495,12 +495,6 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: 425.222, y: 271.226, z: 0}
-      - {x: 426.222, y: 271.726, z: 0}
-      - {x: 428.222, y: 270.726, z: 0}
-      - {x: 429.222, y: 271.226, z: 0}
-      - {x: 700.39764, y: 406.8139, z: 0}
-      - {x: 305.81146, y: 181.41214, z: 0}
       - {x: -88.77472, y: -43.989624, z: 0}
       - {x: -172.97253, y: -92.08644, z: 0}
       - {x: -64.49896, y: 4.731201, z: 0}
@@ -521,8 +515,11 @@ MonoBehaviour:
       - {x: 94.20173, y: 196.5715, z: 0}
       - {x: 162.39862, y: 186.87323, z: 0}
       - {x: 207.16022, y: 180.50769, z: 0}
-      - {x: 238.56982, y: 166.25452, z: 0}
+      - {x: 238.56982, y: 166.2545, z: 0}
       - {x: 290.66864, y: 148.38348, z: 0}
+      - {x: 327.79047, y: 135.6499, z: 0}
+      - {x: 339.16882, y: 167.3902, z: 0}
+      - {x: 350.54718, y: 199.13055, z: 0}
       isClosed: 0
       space: 1
       controlMode: 0
@@ -532,7 +529,6 @@ MonoBehaviour:
         m_Center: {x: 427.222, y: 271.226, z: 0}
         m_Extent: {x: 2, y: 0.14433289, z: 0}
       perAnchorNormalsAngle:
-      - 0
       - 0
       - 0
       - 0
@@ -566,6 +562,7 @@ MonoBehaviour:
     tabIndex: 0
   initialized: 1
   _isDrawPathWhenSelected: 1
+  _isAllowShowPath: 1
 --- !u!224 &1287153677
 RectTransform:
   m_ObjectHideFlags: 0
