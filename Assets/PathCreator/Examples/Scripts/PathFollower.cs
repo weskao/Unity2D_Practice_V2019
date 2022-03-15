@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace PathCreation.Examples
 {
@@ -9,7 +10,11 @@ namespace PathCreation.Examples
         public PathCreator pathCreator;
         public EndOfPathInstruction endOfPathInstruction;
         public float speed = 5;
+        
         float distanceTravelled;
+        public Action onReachEnd;
+
+        private bool IsReachEnd => distanceTravelled >= pathCreator.path.length;
 
         [SerializeField]
         private bool _isAllowRotation;
@@ -33,6 +38,11 @@ namespace PathCreation.Examples
                 {
                     transform.rotation =
                         pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+                }
+                
+                if(IsReachEnd)
+                {
+                    onReachEnd?.Invoke();
                 }
             }
         }
