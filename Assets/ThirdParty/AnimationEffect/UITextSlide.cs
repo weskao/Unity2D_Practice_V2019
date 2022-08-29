@@ -44,7 +44,7 @@ public class UITextSlide : MonoBehaviour
     private void StateChangeToInit()
     {
         _currentState = State.Init;
-        Debug.LogFormat("<color=yellow>UITextSlide - StateChangeToInit()</color>");
+        // Debug.LogFormat("<color=yellow>UITextSlide - StateChangeToInit()</color>");
 
         iTween.MoveTo(gameObject, iTween.Hash("x", 0,
                                               "time", 0,
@@ -56,11 +56,11 @@ public class UITextSlide : MonoBehaviour
 
     private void StateChangeToTween()
     {
-        Debug.LogFormat("<color=yellow>UITextSlide - StateChangeToTween()</color>");
+        // Debug.LogFormat("<color=yellow>UITextSlide - StateChangeToTween()</color>");
 
         float diff = _rectTransform.rect.width - _tmpText.preferredWidth;
 
-        Debug.Log($"diff = {diff}");
+        // Debug.Log($"diff = {diff}");
 
         if (diff >= 0)
             return;
