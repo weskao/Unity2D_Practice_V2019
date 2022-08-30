@@ -12,14 +12,14 @@ namespace Practice2
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S))
             {
                 customAnimatorController.PlayAnimation(toggleVisibleAnimationName);
             }
 
-            if (Input.GetKey(KeyCode.G))
+            if (Input.GetKeyDown(KeyCode.G))
             {
-                Debug.LogFormat("<color=yellow>Wes - [Square] Start ot get information</color>");
+                Debug.LogFormat("<color=yellow>Wes - [Square] Start to get information</color>");
                 customAnimatorController.GetAnimationLoopTime(toggleVisibleAnimationName);
             }
         }
