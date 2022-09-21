@@ -77,6 +77,11 @@ namespace Practice2
             _animator.SetTrigger(Forward);
         }
 
+        public void MoveSquareToLastFrame()
+        {
+            _animator.Play(Forward, 0, 1);
+        }
+
         private void Update()
         {
             AnimationManager.Instance.CheckAnimationCompleted(Forward, OnAnimationComplete);
